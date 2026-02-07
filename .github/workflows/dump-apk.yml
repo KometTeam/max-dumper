@@ -1,0 +1,73 @@
+name: Dump APK from RuStore
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [dump-apk]
+
+permissions:
+  contents: write
+
+jobs:
+  dump-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Download APK
+        id: download
+        run: |
+          PACKAGE="ru.oneme.app"
+          
+          python dumper.py "$PACKAGE"
+          
+          APP_INFO=$(cat app_info.json)
+          
+          APK_FILE=$(ls *.apk | head -n 1)
+          echo "file=$APK_FILE" >> $GITHUB_OUTPUT
+          
+          echo "package=$PACKAGE" >> $GITHUB_OUTPUT
+          echo "version=$(echo $APP_INFO | jq -r '.version_name')" >> $GITHUB_OUTPUT
+          echo "version_code=$(echo $APP_INFO | jq -r '.version_code')" >> $GITHUB_OUTPUT
+          echo "min_sdk=$(echo $APP_INFO | jq -r '.min_sdk_version')" >> $GITHUB_OUTPUT
+          echo "target_sdk=$(echo $APP_INFO | jq -r '.target_sdk_version')" >> $GITHUB_OUTPUT
+          
+          echo "whats_new<<EOF" >> $GITHUB_OUTPUT
+          jq -r '.whats_new' app_info.json >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: "${{ steps.download.outputs.package }}-v${{ steps.download.outputs.version }}"
+          name: "${{ steps.download.outputs.package }} v${{ steps.download.outputs.version }}"
+          body: |
+            📦 **APK дамп из RuStore**
+            
+            ### 📋 Информация о приложении
+            - **Package:** `${{ steps.download.outputs.package }}`
+            - **Version:** `${{ steps.download.outputs.version }}` (build `${{ steps.download.outputs.version_code }}`)
+            - **Min SDK:** Android `${{ steps.download.outputs.min_sdk }}`
+            - **Target SDK:** Android `${{ steps.download.outputs.target_sdk }}`
+            
+            ### ✨ Что нового
+            ```
+            ${{ steps.download.outputs.whats_new }}
+            ```
+          files: |
+            ${{ steps.download.outputs.file }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
