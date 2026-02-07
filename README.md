@@ -1,4 +1,4 @@
-# APK Dumper
+# MAX Dumper
 
 Автоматический дамп мессенджера MAX APK через GitHub Actions.
 
