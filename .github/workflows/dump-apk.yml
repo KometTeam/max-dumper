@@ -46,6 +46,17 @@ jobs:
           echo "whats_new<<EOF" >> $GITHUB_OUTPUT
           jq -r '.whats_new' app_info.json >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Patch APK with apk-mitm
+        id: patch
+        run: |
+          APK_FILE="${{ steps.download.outputs.file }}"
+          PATCHED_FILE="${APK_FILE%.apk}-patched.apk"
+          
+          apk-mitm "$APK_FILE" --output "$PATCHED_FILE"
+          
+          echo "patched_file=$PATCHED_FILE" >> $GITHUB_OUTPUT
+        continue-on-error: true
       
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -65,8 +76,10 @@ jobs:
             ```
             ${{ steps.download.outputs.whats_new }}
             ```
+            🔓 `*-patched.apk` — версия с отключённым SSL pinning
           files: |
             ${{ steps.download.outputs.file }}
+            ${{ steps.download.outputs.patched_file }}
           draft: false
           prerelease: false
         env:
