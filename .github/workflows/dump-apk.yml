@@ -56,7 +56,7 @@ jobs:
           APK_FILE="${{ steps.download.outputs.file }}"
           PATCHED_FILE="${APK_FILE%.apk}-patched.apk"
           
-          apk-mitm "$APK_FILE" --output "$PATCHED_FILE"
+          apk-mitm "$APK_FILE"
           
           echo "patched_file=$PATCHED_FILE" >> $GITHUB_OUTPUT
         continue-on-error: true
