@@ -56,10 +56,11 @@ jobs:
           APK_FILE="${{ steps.download.outputs.file }}"
           PATCHED_FILE="${APK_FILE%.apk}-patched.apk"
           
-          apk-mitm "$APK_FILE"
+          apk-mitm "$APK_FILE" || true
           
-          echo "patched_file=$PATCHED_FILE" >> $GITHUB_OUTPUT
-        continue-on-error: true
+          if [ -f "$PATCHED_FILE" ]; then
+            echo "patched_file=$PATCHED_FILE" >> $GITHUB_OUTPUT
+          fi
       
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -82,7 +83,7 @@ jobs:
             🔓 `*-patched.apk` — версия с отключённым SSL pinning
           files: |
             ${{ steps.download.outputs.file }}
-            ${{ steps.download.outputs.patched_file }}
+            ${{ steps.patch.outputs.patched_file != '' && steps.patch.outputs.patched_file || '' }}
           draft: false
           prerelease: false
         env:
