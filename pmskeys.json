@@ -1,9 +1,9 @@
 {
     "class": "ru.ok.tamtam.android.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 312,
+    "total_keys": 314,
     "keys": [
-        "omd",
+        "jmd",
         "set-unread-timeout",
         "proxy",
         "debug-mode",
@@ -302,6 +302,7 @@
         "calc-audio-wave",
         "audio-peaks-count",
         "keep-background-socket",
+        "ping-background-interval",
         "spin-lock-enabled",
         "digitalid-botid",
         "story",
@@ -314,6 +315,7 @@
         "live-streams-url-prefix",
         "phone-privacy-config",
         "contacts-settings-move",
+        "new-intent-fix",
         "prefs_release"
     ]
 }
