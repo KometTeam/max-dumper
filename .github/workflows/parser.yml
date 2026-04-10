@@ -1,9 +1,9 @@
 name: Decompile APK and Parse Smali
 
 on:
- workflow_dispatch:
- release:
-  types: [published]
+  workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   decompile_and_parse:
@@ -39,28 +39,55 @@ jobs:
 
       - name: Run Parser Script
         run: |
-          # Определяем путь к нужному smali файлу
           SMALI_PATH="decompiled_out/smali/ru/ok/tamtam/android/prefs/PmsKey.smali"
           
-          # Проверяем, существует ли файл (в разных APK smali может быть в smali_classes2 и т.д.)
           if [ ! -f "$SMALI_PATH" ]; then
             SMALI_PATH=$(find decompiled_out -name "PmsKey.smali" | head -n 1)
           fi
           
           echo "Target file: $SMALI_PATH"
-          
-          # Модифицируем запуск скрипта: передаем путь к файлу как аргумент или переименовываем
-          # Чтобы par.py работал без изменений, создадим ex.txt из найденного файла
           cp "$SMALI_PATH" ex.txt
-          
-          python3 par.py > result.json
+          python3 par.py > pmskeys.json
 
       - name: Commit and Push results
+        id: commit_step
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add result.json
-          git commit -m "Update parsed smali keys: $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
-          git push
+          
+          # Capture the diff before committing
+          # We use --unified=0 to keep the notification short
+          DIFF_CONTENT=$(git diff --unified=0 pmskeys.json | grep -E '^\+|\-' | grep -v '+++' | grep -v '---' || true)
+          
+          # Escape newlines for GitHub Output
+          echo "diff_text<<EOF" >> $GITHUB_OUTPUT
+          echo "$DIFF_CONTENT" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+          git add pmskeys.json
+          if git commit -m "Update parsed smali keys: $(date +'%Y-%m-%d %H:%M')"; then
+            git push
+            echo "updated=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit"
+            echo "updated=false" >> $GITHUB_OUTPUT
+          fi
         env:
-          GITHUB_TOKEN: ${{ secrets.SECRET_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Send Telegram Notification
+        if: steps.commit_step.outputs.updated == 'true'
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: markdown
+          message: |
+            *New PmsKeys found!*
+            
+            *Changes:*
+            ```diff
+            ${{ steps.commit_step.outputs.diff_text }}
+            ```
+            
+            [View Full Commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
