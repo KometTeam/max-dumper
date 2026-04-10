@@ -1,0 +1,65 @@
+name: Decompile APK and Parse Smali
+
+on:
+ release:
+  types: [published]
+
+jobs:
+  decompile_and_parse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+        
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apktool
+
+      - name: Download APK
+        run: |
+          curl -L "https://github.com/KometTeam/max-dumper/releases/latest/download/ru.oneme.app.apk" -o app.apk
+
+      - name: Decompile APK
+        run: |
+          apktool d app.apk -o decompiled_out
+
+      - name: Run Parser Script
+        run: |
+          # Определяем путь к нужному smali файлу
+          SMALI_PATH="decompiled_out/smali/ru/ok/tamtam/android/prefs/PmsKey.smali"
+          
+          # Проверяем, существует ли файл (в разных APK smali может быть в smali_classes2 и т.д.)
+          if [ ! -f "$SMALI_PATH" ]; then
+            SMALI_PATH=$(find decompiled_out -name "PmsKey.smali" | head -n 1)
+          fi
+          
+          echo "Target file: $SMALI_PATH"
+          
+          # Модифицируем запуск скрипта: передаем путь к файлу как аргумент или переименовываем
+          # Чтобы par.py работал без изменений, создадим ex.txt из найденного файла
+          cp "$SMALI_PATH" ex.txt
+          
+          python3 par.py > result.json
+
+      - name: Commit and Push results
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add result.json
+          git commit -m "Update parsed smali keys: $(date +'%Y-%m-%d %H:%M')" || echo "No changes to commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.SECRET_GITHUB_TOKEN }}
