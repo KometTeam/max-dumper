@@ -1,6 +1,7 @@
 name: Decompile APK and Parse Smali
 
 on:
+ workflow_dispatch:
  release:
   types: [published]
 
