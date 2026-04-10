@@ -55,11 +55,11 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           
-          # Capture the diff before committing
-          # We use --unified=0 to keep the notification short
-          DIFF_CONTENT=$(git diff --unified=0 pmskeys.json | grep -E '^\+|\-' | grep -v '+++' | grep -v '---' || true)
+          # Use sed to capture only added/removed lines, skipping the file headers
+          # This avoids the "grep unrecognized option" error
+          DIFF_CONTENT=$(git diff --unified=0 pmskeys.json | sed -n '/^[+-][^+-]/p' | head -c 3000)
           
-          # Escape newlines for GitHub Output
+          # Save to output using a multi-line delimiter
           echo "diff_text<<EOF" >> $GITHUB_OUTPUT
           echo "$DIFF_CONTENT" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
