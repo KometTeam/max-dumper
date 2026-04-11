@@ -55,11 +55,8 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           
-          # Use sed to capture only added/removed lines, skipping the file headers
-          # This avoids the "grep unrecognized option" error
           DIFF_CONTENT=$(git diff --unified=0 pmskeys.json | sed -n '/^[+-][^+-]/p' | head -c 3000)
           
-          # Save to output using a multi-line delimiter
           echo "diff_text<<EOF" >> $GITHUB_OUTPUT
           echo "$DIFF_CONTENT" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
@@ -67,6 +64,9 @@ jobs:
           git add pmskeys.json
           if git commit -m "Update parsed smali keys: $(date +'%Y-%m-%d %H:%M')"; then
             git push
+            # Capture the NEW commit SHA
+            NEW_SHA=$(git rev-parse HEAD)
+            echo "new_sha=$NEW_SHA" >> $GITHUB_OUTPUT
             echo "updated=true" >> $GITHUB_OUTPUT
           else
             echo "No changes to commit"
@@ -90,4 +90,4 @@ jobs:
             ${{ steps.commit_step.outputs.diff_text }}
             ```
             
-            [View Full Commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+            [View Full Commit](https://github.com/${{ github.repository }}/commit/${{ steps.commit_step.outputs.new_sha }})
