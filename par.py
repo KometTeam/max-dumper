@@ -12,7 +12,7 @@ def parse_smali_enum(file_content):
     clean_entries = [entry.strip().strip('"') for entry in raw_entries]
     
     try:
-        start_index = clean_entries.index("fullContentString") + 2
+        start_index = clean_entries.index("fullContentString") + 3
         keys = clean_entries[start_index:]
     except ValueError:
         keys = clean_entries
