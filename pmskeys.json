@@ -1,9 +1,8 @@
 {
     "class": "ru.ok.tamtam.android.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 314,
+    "total_keys": 316,
     "keys": [
-        "jmd",
         "set-unread-timeout",
         "proxy",
         "debug-mode",
@@ -316,6 +315,9 @@
         "phone-privacy-config",
         "contacts-settings-move",
         "new-intent-fix",
+        "push-check",
+        "show-vpn-chat-bottomsheet",
+        "show-vpn-call-bottomsheet",
         "prefs_release"
     ]
 }
