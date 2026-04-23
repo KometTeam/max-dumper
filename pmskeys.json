@@ -1,7 +1,7 @@
 {
     "class": "ru.ok.tamtam.android.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 322,
+    "total_keys": 329,
     "keys": [
         "set-unread-timeout",
         "proxy",
@@ -275,6 +275,8 @@
         "speedy-voice-messages",
         "february-23-26-theme",
         "march-8-26-theme",
+        "channel-view-config",
+        "read-listener-fix",
         "stickers-botid",
         "sticker-set-edit-enabled",
         "invalidate-db-msg-exception",
@@ -291,6 +293,7 @@
         "presence-keep-bg-cache",
         "notif-typing-presence",
         "presence-offline-move-timeout",
+        "presence-offline-log",
         "video-speed",
         "chat-mark-batch-fail-interval",
         "multi-select-bars-redesign",
@@ -324,6 +327,10 @@
         "show-vpn-chat-bottomsheet",
         "show-vpn-call-bottomsheet",
         "not-contact-placeholder",
+        "comments-enabled",
+        "cancel-stale-notifications",
+        "mediasaves-context",
+        "mediasaves-menu",
         "prefs_release"
     ]
 }
