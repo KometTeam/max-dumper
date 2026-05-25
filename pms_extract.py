@@ -116,10 +116,8 @@ def main() -> int:
             "powered_by": "t.me/teamkomet",
             "total_keys": len(pairs),
             "keys": [k for k, _m, _p in pairs],
-            "properties": [{"key": k, "method": m} for k, m, _p in pairs],
-            "holder_smali": str(src.relative_to(decoded)),
         }
-        Path(args.output).write_text(json.dumps(result, indent=2, ensure_ascii=False))
+        Path(args.output).write_text(json.dumps(result, indent=4, ensure_ascii=False))
         print(f"wrote {args.output} ({len(pairs)} keys)")
         return 0
     finally:
