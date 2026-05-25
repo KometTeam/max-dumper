@@ -1,1730 +1,339 @@
 {
-  "class": "one.me.sdk.prefs.PmsKey",
-  "powered_by": "t.me/teamkomet",
-  "total_keys": 344,
-  "keys": [
-    "set-unread-timeout",
-    "proxy",
-    "debug-mode",
-    "min-log-level",
-    "user-debug-report",
-    "android-use-logcat-logger",
-    "proxy-domains",
-    "image-width",
-    "image-height",
-    "image-quality",
-    "image-size",
-    "max-msg-length",
-    "max-participants",
-    "max-added-participants",
-    "max-audio-length",
-    "max-theme-length",
-    "app-update-type",
-    "recovery-url",
-    "max-description-length",
-    "edit-timeout",
-    "chats-page-size",
-    "keep-connection",
-    "invite-link",
-    "invite-short",
-    "invite-long",
-    "invite-header",
-    "file-upload-max-size",
-    "file-upload-unsupported-types",
-    "chats-preload-period",
-    "max-favorite-chats",
-    "disconnect-timeout",
-    "hash",
-    "max-attach-count",
-    "support-account",
-    "support-email",
-    "wakelock-on-push",
-    "mentions_entity_names_limit",
-    "max-readmarks",
-    "delete-msg-fys-large-chat-disabled",
-    "max-video-duration-download",
-    "max-favorite-stickers",
-    "max-favorite-sticker-sets",
-    "min-sticker-size",
-    "max-sticker-size",
-    "default-sticker-size",
-    "min-image-side-size",
-    "min-duration-save-audio-start-time",
-    "min-duration-playback-speed",
-    "drafts-sync-enabled",
-    "audio-transcription-locales",
-    "scheduled-messages-enabled",
-    "scheduled-posts-enabled",
-    "scheduled-faves-enabled",
-    "delete-message-from-reply",
-    "tracer-non-fatal-crashed-enabled",
-    "subscription-timeout-seconds",
-    "reactions-max",
-    "react-errors",
-    "msg-get-reactions-page-size",
-    "wm-workers-limit",
-    "wm-check-workers-count-interval-sec",
-    "wm-backlog-worker-check-delay-sec",
-    "wm-backlog-worker-backoff-delay-sec",
-    "wm-workers-offset",
-    "worker-progress-time-diff-for-notify-ms",
-    "max-downloaded-size-for-notify-kb",
-    "progress-diff-for-notify",
-    "fb-exec-replace",
-    "fb-exec-modifiers-names",
-    "log-full",
-    "log-sensitive",
-    "anr-config",
-    "debug-profile-info",
-    "calls-endpoint",
-    "fake-chats",
-    "channels-enabled",
-    "available-complaints",
-    "in-app-review-triggers",
-    "fake-in-app-review",
-    "invite-friends-sheet-frequency",
-    "welcome-sticker-ids",
-    "money-transfer-botid",
-    "non-contact-sync-time",
-    "non-contact-max-chunk-size",
-    "non-contact-collection-interval",
-    "edit-chat-type-screen-enabled",
-    "transfer-entry-point",
-    "group-call-part-limit",
-    "gc-from-p2p",
-    "gc-link-pre-settings",
-    "gc-wait-admin",
-    "call-pinch-to-zoom",
-    "early-call-start",
-    "outgoing-call-uri",
-    "account-nickname-enabled",
-    "send-location-enabled",
-    "reconnect-call-ringtone",
-    "media-viewer-rotation-enabled",
-    "mytracker-enabled",
-    "chat-video-autoplay-parallel-count",
-    "bot-complaint-enabled",
-    "calls-sdk-am-speaker-fix",
-    "calls-sdk-webrtc-logs",
-    "calls-sdk-traffic-markup",
-    "calls-sdk-ai-opus-bwe",
-    "calls-use-p2p-relay",
-    "calls-use-p2p-relay-caps",
-    "calls-sdk-incall-stat",
-    "calls-android-no-ice-restart",
-    "calls-android-vtv2",
-    "calls-android-lla",
-    "calls-android-nodws",
-    "calls-android-ice-cps",
-    "calls-android-h265-s",
-    "calls-android-early-create-pc",
-    "calls-android-fast-join",
-    "calls-android-ns",
-    "calls-android-ac",
-    "calls-android-new-pms",
-    "calls-sdk-h265-prioritized",
-    "calls-android-wtp",
-    "call-permissions-interval",
-    "energy-saving-request-interval",
-    "energy-saving-bottom-sheet",
-    "calls-sdk-disable-pipeline",
-    "calls-sdk-log-audio",
-    "calls-android-update-endpoint-params",
-    "calls-sdk-dnt-disable-audio",
-    "calls-sdk-opus-adapt",
-    "calls-android-early-set-offer",
-    "calls-android-gen-peerid",
-    "cfs",
-    "ab-status",
-    "conn-timeouts",
-    "media-transform",
-    "video-transcoding-class",
-    "call-rate",
-    "call-chat-members-load-config",
-    "calls-history-new",
-    "send-queue-size",
-    "webapp-ds-keys-count",
-    "webapp-ss-keys-count",
-    "create-channel-type-screen",
-    "edit-channel-type-screen-enabled",
-    "fresco-threadsafe-refs",
-    "video-msg-config",
-    "stat-session-background-threshold",
-    "bot-start-param",
-    "migrate-unsafe-warn",
-    "media-order",
-    "bad-networ-indicator-config",
-    "analytics-enabled",
-    "mytracker-log-level",
-    "search-webapps-showcase",
-    "player-load-control",
-    "settings-entry-banners",
-    "folders-max-count",
-    "net-client-dns-enabled",
-    "creation-2fa-config",
-    "one-video-player",
-    "one-video-failover",
-    "one-video-uploader-config",
-    "webview-cache-enabled",
-    "quotes-enabled",
-    "upload-video-config",
-    "upload-fast-start",
-    "upload-on-fail-trnscd",
-    "upload-error-retry",
-    "upload-compress-lvl",
-    "devnull",
-    "perf-events",
-    "perf-registrar-config",
-    "server-side-complains-enabled",
-    "channels-complaint-enabled",
-    "landscape",
-    "media-playlist-enabled",
-    "video-msg-download-urls-hack-enabled",
-    "net-stat-config",
-    "informer-enabled",
-    "camera-freeze-detector-timeout",
-    "camera-photo-executor",
-    "family-protection-botid",
-    "enable-unknown-contact-bottom-sheet",
-    "contact-add-bottom-sheet",
-    "opcode-stat-config",
-    "inline-ev-player",
-    "channel-statistics-botid",
-    "y-map",
-    "ringtone-player-focus",
-    "hide-incoming-call-notif",
-    "two-account-mvp",
-    "new-collage",
-    "reactions-sync-time",
-    "min-sound-hearable-level",
-    "official-org",
-    "org-profile",
-    "video-content-cache-ttl",
-    "audio-play-cache-ttl",
-    "chatlist-subtitle-ver",
-    "join-requests",
-    "new-year-theme-2026",
-    "horizontal-call-mode",
-    "white-list-links",
-    "set-audio-device",
-    "system-default-ringtone-opt",
-    "ringtone-content-type",
-    "webapp-push-open",
-    "webapp-exc",
-    "reactions-settings-enabled",
-    "default-reactions-settings",
-    "non-contact-complaints-enabled",
-    "ov-media-send-enabled",
-    "typing-send-enabled",
-    "cis-enabled",
-    "channels-suggests-folder",
-    "video-fast-seek-enabled",
-    "log-violations",
-    "new-media-edit-screen",
-    "stickers-db-batch",
-    "host-reachability",
-    "dps",
-    "error-stat-limit",
-    "upload-hang-barrier",
-    "memory-slice-interval",
-    "push-delivery",
-    "battery-slice-interval",
-    "render-polls",
-    "polls-in-p2p-chats",
-    "polls-in-p2g-chats",
-    "polls-in-channels",
-    "poll-ttl",
-    "chat-history-warm-opts",
-    "chat-history-warm-fail-interval",
-    "chat-history-notif-msg-strategy",
-    "chat-history-persist",
-    "chat-history-login-count",
-    "enable-filters-for-folders",
-    "min-free-available-space-mb",
-    "net-session-suppress-bad-disconnected-state",
-    "net-ssl-session-validate",
-    "net-session-rbc-enabled",
-    "csnl",
-    "bots-channel-adding",
-    "debug-broken-contact",
-    "chats-multi-select",
-    "db-query-ex-count",
-    "db-tr-ex-count",
-    "wm-ex-count",
-    "speedy-upload",
-    "audio-play-opus",
-    "audio-download-fallback",
-    "audio-prefetch",
-    "video-prefetch",
-    "video-prefetch-max-duration",
-    "prefetch-no-workers",
-    "open-video-from-start",
-    "speedy-voice-messages",
-    "system-thread-pool-queue",
-    "watchdog-config",
-    "fresco-executor",
-    "february-23-26-theme",
-    "march-8-26-theme",
-    "stickers-botid",
-    "sticker-set-edit-enabled",
-    "invalidate-db-msg-exception",
-    "invalidate-db-force",
-    "webapp-pr",
-    "log-messages-meta",
-    "log-chat-meta",
-    "presence-ttl",
-    "presence-view-port",
-    "presence-external",
-    "presence-seen-eq",
-    "presence-stat",
-    "presence-call-fix",
-    "presence-handle-error-fix",
-    "presence-reset-update-time",
-    "presence-keep-bg-cache",
-    "notif-typing-presence",
-    "presence-offline-move-timeout",
-    "presence-offline-log",
-    "presence-by-timer",
-    "chat-mark-batch-fail-interval",
-    "multi-select-bars-redesign",
-    "pub-search-limit",
-    "client-conv-id",
-    "settings-business",
-    "enable-audio-messages-transcription",
-    "enable-video-messages-transcription",
-    "retry-transcribe-attempt",
-    "retry-transcribe-timeout",
-    "media-not-ready-retry-delay",
-    "calc-audio-wave",
-    "calc-video-wave",
-    "audio-peaks-count",
-    "keep-background-socket",
-    "ping-background-interval",
-    "spin-lock-enabled",
-    "dns-seq-stat",
-    "digitalid-botid",
-    "story",
-    "opus-recorder",
-    "opus-recorder-bitrate",
-    "opus-recorder-sample-rate",
-    "glyph-warm",
-    "informer-divider-can-hidden",
-    "informer-coloring",
-    "live-streams",
-    "live-streams-url-prefix",
-    "phone-privacy-config",
-    "contacts-settings-move",
-    "new-intent-fix",
-    "push-check",
-    "calls-fakeboss-incoming-call-enabled",
-    "incoming-call-orgs",
-    "show-vpn-chat-bottomsheet",
-    "show-vpn-call-bottomsheet",
-    "not-contact-placeholder",
-    "comments-enabled",
-    "cancel-stale-notifications",
-    "mediasaves-context",
-    "mediasaves-menu",
-    "show-vpn-snackbar",
-    "calls-android-simulcast-sw-vp8",
-    "calls-sdk-simulcast",
-    "channel-view-config",
-    "read-listener-fix",
-    "media-thumbhash",
-    "webapp-phone-hash",
-    "adapt-bubble-width",
-    "calls-android-signaling-to",
-    "new-avatar-gradient-colors-enabled",
-    "calls-android-ssttl",
-    "fix-folders-counter",
-    "blocked-users",
-    "informer-icon-themed",
-    "organization-placeholder",
-    "ilm",
-    "worker-early-fg",
-    "worker-download-fg-fix",
-    "call-ping-fix",
-    "fix-presense-lock",
-    "messages-loader-behind",
-    "stories-config"
-  ],
-  "properties": [
-    {
-      "key": "set-unread-timeout",
-      "method": "setUnreadTimeout"
-    },
-    {
-      "key": "proxy",
-      "method": "proxy"
-    },
-    {
-      "key": "debug-mode",
-      "method": "debugMode"
-    },
-    {
-      "key": "min-log-level",
-      "method": "getMin-log-level"
-    },
-    {
-      "key": "user-debug-report",
-      "method": "userDebugReport"
-    },
-    {
-      "key": "android-use-logcat-logger",
-      "method": "androidUseLogcatLogger"
-    },
-    {
-      "key": "proxy-domains",
-      "method": "proxyDomains"
-    },
-    {
-      "key": "image-width",
-      "method": "imageWidth"
-    },
-    {
-      "key": "image-height",
-      "method": "imageHeight"
-    },
-    {
-      "key": "image-quality",
-      "method": "imageQuality"
-    },
-    {
-      "key": "image-size",
-      "method": "imageSize"
-    },
-    {
-      "key": "max-msg-length",
-      "method": "maxMsgLength"
-    },
-    {
-      "key": "max-participants",
-      "method": "maxParticipants"
-    },
-    {
-      "key": "max-added-participants",
-      "method": "maxAddedParticipants"
-    },
-    {
-      "key": "max-audio-length",
-      "method": "maxAudioLength"
-    },
-    {
-      "key": "max-theme-length",
-      "method": "maxThemeLength"
-    },
-    {
-      "key": "app-update-type",
-      "method": "appUpdateType"
-    },
-    {
-      "key": "recovery-url",
-      "method": "recoveryUrl"
-    },
-    {
-      "key": "max-description-length",
-      "method": "maxDescriptionLength"
-    },
-    {
-      "key": "edit-timeout",
-      "method": "editTimeout"
-    },
-    {
-      "key": "chats-page-size",
-      "method": "chatsPageSize"
-    },
-    {
-      "key": "keep-connection",
-      "method": "keepConnection"
-    },
-    {
-      "key": "invite-link",
-      "method": "inviteLink"
-    },
-    {
-      "key": "invite-short",
-      "method": "inviteShort"
-    },
-    {
-      "key": "invite-long",
-      "method": "inviteLong"
-    },
-    {
-      "key": "invite-header",
-      "method": "inviteHeader"
-    },
-    {
-      "key": "file-upload-max-size",
-      "method": "fileUploadMaxSize"
-    },
-    {
-      "key": "file-upload-unsupported-types",
-      "method": "fileUploadUnsupportedTypes"
-    },
-    {
-      "key": "chats-preload-period",
-      "method": "chatsPreloadPeriod"
-    },
-    {
-      "key": "max-favorite-chats",
-      "method": "maxFavoriteChats"
-    },
-    {
-      "key": "disconnect-timeout",
-      "method": "disconnectTimeout"
-    },
-    {
-      "key": "hash",
-      "method": "hash"
-    },
-    {
-      "key": "max-attach-count",
-      "method": "maxAttachCount"
-    },
-    {
-      "key": "support-account",
-      "method": "supportAccount"
-    },
-    {
-      "key": "support-email",
-      "method": "supportEmail"
-    },
-    {
-      "key": "wakelock-on-push",
-      "method": "wakelockOnPush"
-    },
-    {
-      "key": "mentions_entity_names_limit",
-      "method": "mentions_entity_names_limit"
-    },
-    {
-      "key": "max-readmarks",
-      "method": "maxReadmarks"
-    },
-    {
-      "key": "delete-msg-fys-large-chat-disabled",
-      "method": "deleteMsgFysLargeChatDisabled"
-    },
-    {
-      "key": "max-video-duration-download",
-      "method": "maxVideoDurationDownload"
-    },
-    {
-      "key": "max-favorite-stickers",
-      "method": "maxFavoriteStickers"
-    },
-    {
-      "key": "max-favorite-sticker-sets",
-      "method": "maxFavoriteStickerSets"
-    },
-    {
-      "key": "min-sticker-size",
-      "method": "minStickerSize"
-    },
-    {
-      "key": "max-sticker-size",
-      "method": "maxStickerSize"
-    },
-    {
-      "key": "default-sticker-size",
-      "method": "defaultStickerSize"
-    },
-    {
-      "key": "min-image-side-size",
-      "method": "minImageSideSize"
-    },
-    {
-      "key": "min-duration-save-audio-start-time",
-      "method": "minDurationSaveAudioStartTime"
-    },
-    {
-      "key": "min-duration-playback-speed",
-      "method": "minDurationPlaybackSpeed"
-    },
-    {
-      "key": "drafts-sync-enabled",
-      "method": "draftsSyncEnabled"
-    },
-    {
-      "key": "audio-transcription-locales",
-      "method": "audioTranscriptionLocales"
-    },
-    {
-      "key": "scheduled-messages-enabled",
-      "method": "scheduledMessagesEnabled"
-    },
-    {
-      "key": "scheduled-posts-enabled",
-      "method": "scheduledPostsEnabled"
-    },
-    {
-      "key": "scheduled-faves-enabled",
-      "method": "scheduledFavesEnabled"
-    },
-    {
-      "key": "delete-message-from-reply",
-      "method": "deleteMessageFromReply"
-    },
-    {
-      "key": "tracer-non-fatal-crashed-enabled",
-      "method": "getTracer-non-fatal-crashed-enabled"
-    },
-    {
-      "key": "subscription-timeout-seconds",
-      "method": "subscriptionTimeoutSeconds"
-    },
-    {
-      "key": "reactions-max",
-      "method": "reactionsMax"
-    },
-    {
-      "key": "react-errors",
-      "method": "reactErrors"
-    },
-    {
-      "key": "msg-get-reactions-page-size",
-      "method": "msgGetReactionsPageSize"
-    },
-    {
-      "key": "wm-workers-limit",
-      "method": "wmWorkersLimit"
-    },
-    {
-      "key": "wm-check-workers-count-interval-sec",
-      "method": "wmCheckWorkersCountIntervalSec"
-    },
-    {
-      "key": "wm-backlog-worker-check-delay-sec",
-      "method": "wmBacklogWorkerCheckDelaySec"
-    },
-    {
-      "key": "wm-backlog-worker-backoff-delay-sec",
-      "method": "wmBacklogWorkerBackoffDelaySec"
-    },
-    {
-      "key": "wm-workers-offset",
-      "method": "wmWorkersOffset"
-    },
-    {
-      "key": "worker-progress-time-diff-for-notify-ms",
-      "method": "workerProgressTimeDiffForNotifyMs"
-    },
-    {
-      "key": "max-downloaded-size-for-notify-kb",
-      "method": "maxDownloadedSizeForNotifyKb"
-    },
-    {
-      "key": "progress-diff-for-notify",
-      "method": "progressDiffForNotify"
-    },
-    {
-      "key": "fb-exec-replace",
-      "method": "fbExecReplace"
-    },
-    {
-      "key": "fb-exec-modifiers-names",
-      "method": "fbExecModifiersNames"
-    },
-    {
-      "key": "log-full",
-      "method": "logFull"
-    },
-    {
-      "key": "log-sensitive",
-      "method": "logSensitive"
-    },
-    {
-      "key": "anr-config",
-      "method": "getAnr-config"
-    },
-    {
-      "key": "debug-profile-info",
-      "method": "debugProfileInfo"
-    },
-    {
-      "key": "calls-endpoint",
-      "method": "callsEndpoint"
-    },
-    {
-      "key": "fake-chats",
-      "method": "fakeChats"
-    },
-    {
-      "key": "channels-enabled",
-      "method": "channelsEnabled"
-    },
-    {
-      "key": "available-complaints",
-      "method": "availableComplaints"
-    },
-    {
-      "key": "in-app-review-triggers",
-      "method": "inAppReviewTriggers"
-    },
-    {
-      "key": "fake-in-app-review",
-      "method": "fakeInAppReview"
-    },
-    {
-      "key": "invite-friends-sheet-frequency",
-      "method": "inviteFriendsSheetFrequency"
-    },
-    {
-      "key": "welcome-sticker-ids",
-      "method": "welcomeStickerIds"
-    },
-    {
-      "key": "money-transfer-botid",
-      "method": "moneyTransferBotid"
-    },
-    {
-      "key": "non-contact-sync-time",
-      "method": "nonContactSyncTime"
-    },
-    {
-      "key": "non-contact-max-chunk-size",
-      "method": "nonContactMaxChunkSize"
-    },
-    {
-      "key": "non-contact-collection-interval",
-      "method": "nonContactCollectionInterval"
-    },
-    {
-      "key": "edit-chat-type-screen-enabled",
-      "method": "editChatTypeScreenEnabled"
-    },
-    {
-      "key": "transfer-entry-point",
-      "method": "transferEntryPoint"
-    },
-    {
-      "key": "group-call-part-limit",
-      "method": "groupCallPartLimit"
-    },
-    {
-      "key": "gc-from-p2p",
-      "method": "gcFromP2p"
-    },
-    {
-      "key": "gc-link-pre-settings",
-      "method": "gcLinkPreSettings"
-    },
-    {
-      "key": "gc-wait-admin",
-      "method": "gcWaitAdmin"
-    },
-    {
-      "key": "call-pinch-to-zoom",
-      "method": "callPinchToZoom"
-    },
-    {
-      "key": "early-call-start",
-      "method": "earlyCallStart"
-    },
-    {
-      "key": "outgoing-call-uri",
-      "method": "outgoingCallUri"
-    },
-    {
-      "key": "account-nickname-enabled",
-      "method": "accountNicknameEnabled"
-    },
-    {
-      "key": "send-location-enabled",
-      "method": "sendLocationEnabled"
-    },
-    {
-      "key": "reconnect-call-ringtone",
-      "method": "reconnectCallRingtone"
-    },
-    {
-      "key": "media-viewer-rotation-enabled",
-      "method": "mediaViewerRotationEnabled"
-    },
-    {
-      "key": "mytracker-enabled",
-      "method": "mytrackerEnabled"
-    },
-    {
-      "key": "chat-video-autoplay-parallel-count",
-      "method": "chatVideoAutoplayParallelCount"
-    },
-    {
-      "key": "bot-complaint-enabled",
-      "method": "botComplaintEnabled"
-    },
-    {
-      "key": "calls-sdk-am-speaker-fix",
-      "method": "callsSdkAmSpeakerFix"
-    },
-    {
-      "key": "calls-sdk-webrtc-logs",
-      "method": "callsSdkWebrtcLogs"
-    },
-    {
-      "key": "calls-sdk-traffic-markup",
-      "method": "callsSdkTrafficMarkup"
-    },
-    {
-      "key": "calls-sdk-ai-opus-bwe",
-      "method": "callsSdkAiOpusBwe"
-    },
-    {
-      "key": "calls-use-p2p-relay",
-      "method": "callsUseP2pRelay"
-    },
-    {
-      "key": "calls-use-p2p-relay-caps",
-      "method": "callsUseP2pRelayCaps"
-    },
-    {
-      "key": "calls-sdk-incall-stat",
-      "method": "callsSdkIncallStat"
-    },
-    {
-      "key": "calls-android-no-ice-restart",
-      "method": "callsAndroidNoIceRestart"
-    },
-    {
-      "key": "calls-android-vtv2",
-      "method": "callsAndroidVtv2"
-    },
-    {
-      "key": "calls-android-lla",
-      "method": "callsAndroidLla"
-    },
-    {
-      "key": "calls-android-nodws",
-      "method": "getCalls-android-nodws"
-    },
-    {
-      "key": "calls-android-ice-cps",
-      "method": "callsAndroidIceCps"
-    },
-    {
-      "key": "calls-android-h265-s",
-      "method": "callsAndroidH265S"
-    },
-    {
-      "key": "calls-android-early-create-pc",
-      "method": "callsAndroidEarlyCreatePc"
-    },
-    {
-      "key": "calls-android-fast-join",
-      "method": "callsAndroidFastJoin"
-    },
-    {
-      "key": "calls-android-ns",
-      "method": "callsAndroidNs"
-    },
-    {
-      "key": "calls-android-ac",
-      "method": "getCalls-android-ac"
-    },
-    {
-      "key": "calls-android-new-pms",
-      "method": "callsAndroidNewPms"
-    },
-    {
-      "key": "calls-sdk-h265-prioritized",
-      "method": "callsSdkH265Prioritized"
-    },
-    {
-      "key": "calls-android-wtp",
-      "method": "callsAndroidWtp"
-    },
-    {
-      "key": "call-permissions-interval",
-      "method": "getCall-permissions-interval"
-    },
-    {
-      "key": "energy-saving-request-interval",
-      "method": "getEnergy-saving-request-interval"
-    },
-    {
-      "key": "energy-saving-bottom-sheet",
-      "method": "energySavingBottomSheet"
-    },
-    {
-      "key": "calls-sdk-disable-pipeline",
-      "method": "callsSdkDisablePipeline"
-    },
-    {
-      "key": "calls-sdk-log-audio",
-      "method": "callsSdkLogAudio"
-    },
-    {
-      "key": "calls-android-update-endpoint-params",
-      "method": "callsAndroidUpdateEndpointParams"
-    },
-    {
-      "key": "calls-sdk-dnt-disable-audio",
-      "method": "callsSdkDntDisableAudio"
-    },
-    {
-      "key": "calls-sdk-opus-adapt",
-      "method": "callsSdkOpusAdapt"
-    },
-    {
-      "key": "calls-android-early-set-offer",
-      "method": "callsAndroidEarlySetOffer"
-    },
-    {
-      "key": "calls-android-gen-peerid",
-      "method": "callsAndroidGenPeerid"
-    },
-    {
-      "key": "cfs",
-      "method": "cfs"
-    },
-    {
-      "key": "ab-status",
-      "method": "abStatus"
-    },
-    {
-      "key": "conn-timeouts",
-      "method": "connTimeouts"
-    },
-    {
-      "key": "media-transform",
-      "method": "getMedia-transform"
-    },
-    {
-      "key": "video-transcoding-class",
-      "method": "videoTranscodingClass"
-    },
-    {
-      "key": "call-rate",
-      "method": "callRate"
-    },
-    {
-      "key": "call-chat-members-load-config",
-      "method": "getCall-chat-members-load-config"
-    },
-    {
-      "key": "calls-history-new",
-      "method": "callsHistoryNew"
-    },
-    {
-      "key": "send-queue-size",
-      "method": "sendQueueSize"
-    },
-    {
-      "key": "webapp-ds-keys-count",
-      "method": "webappDsKeysCount"
-    },
-    {
-      "key": "webapp-ss-keys-count",
-      "method": "webappSsKeysCount"
-    },
-    {
-      "key": "create-channel-type-screen",
-      "method": "createChannelTypeScreen"
-    },
-    {
-      "key": "edit-channel-type-screen-enabled",
-      "method": "editChannelTypeScreenEnabled"
-    },
-    {
-      "key": "fresco-threadsafe-refs",
-      "method": "frescoThreadsafeRefsEnabled"
-    },
-    {
-      "key": "video-msg-config",
-      "method": "videoMsgConfig"
-    },
-    {
-      "key": "stat-session-background-threshold",
-      "method": "statSessionBackgroundThreshold"
-    },
-    {
-      "key": "bot-start-param",
-      "method": "botStartParam"
-    },
-    {
-      "key": "migrate-unsafe-warn",
-      "method": "migrateUnsafeWarn"
-    },
-    {
-      "key": "media-order",
-      "method": "mediaOrder"
-    },
-    {
-      "key": "bad-networ-indicator-config",
-      "method": "badNetworIndicatorConfig"
-    },
-    {
-      "key": "analytics-enabled",
-      "method": "analyticsEnabled"
-    },
-    {
-      "key": "mytracker-log-level",
-      "method": "mytrackerLogLevel"
-    },
-    {
-      "key": "search-webapps-showcase",
-      "method": "searchWebappsShowcase"
-    },
-    {
-      "key": "player-load-control",
-      "method": "playerLoadControl"
-    },
-    {
-      "key": "settings-entry-banners",
-      "method": "getSettings-entry-banners"
-    },
-    {
-      "key": "folders-max-count",
-      "method": "foldersMaxCount"
-    },
-    {
-      "key": "net-client-dns-enabled",
-      "method": "netClientDnsEnabled"
-    },
-    {
-      "key": "creation-2fa-config",
-      "method": "creation2faConfig"
-    },
-    {
-      "key": "one-video-player",
-      "method": "oneVideoPlayer"
-    },
-    {
-      "key": "one-video-failover",
-      "method": "oneVideoFailover"
-    },
-    {
-      "key": "one-video-uploader-config",
-      "method": "getOne-video-uploader-config"
-    },
-    {
-      "key": "webview-cache-enabled",
-      "method": "webviewCacheEnabled"
-    },
-    {
-      "key": "quotes-enabled",
-      "method": "quotesEnabled"
-    },
-    {
-      "key": "upload-video-config",
-      "method": "getUpload-video-config"
-    },
-    {
-      "key": "upload-fast-start",
-      "method": "getUpload-fast-start"
-    },
-    {
-      "key": "upload-on-fail-trnscd",
-      "method": "getUpload-on-fail-trnscd"
-    },
-    {
-      "key": "upload-error-retry",
-      "method": "getUpload-error-retry"
-    },
-    {
-      "key": "upload-compress-lvl",
-      "method": "getUpload-compress-lvl"
-    },
-    {
-      "key": "devnull",
-      "method": "getDevnull"
-    },
-    {
-      "key": "perf-events",
-      "method": "getPerf-events"
-    },
-    {
-      "key": "perf-registrar-config",
-      "method": "getPerf-registrar-config"
-    },
-    {
-      "key": "server-side-complains-enabled",
-      "method": "serverSideComplainsEnabled"
-    },
-    {
-      "key": "channels-complaint-enabled",
-      "method": "channelsComplaintEnabled"
-    },
-    {
-      "key": "landscape",
-      "method": "getLandscape"
-    },
-    {
-      "key": "media-playlist-enabled",
-      "method": "mediaPlaylistEnabled"
-    },
-    {
-      "key": "video-msg-download-urls-hack-enabled",
-      "method": "videoMsgDownloadUrlsHackEnabled"
-    },
-    {
-      "key": "net-stat-config",
-      "method": "getNet-stat-config"
-    },
-    {
-      "key": "informer-enabled",
-      "method": "informerEnabled"
-    },
-    {
-      "key": "camera-freeze-detector-timeout",
-      "method": "cameraFreezeDetectorTimeout"
-    },
-    {
-      "key": "camera-photo-executor",
-      "method": "cameraPhotoExecutor"
-    },
-    {
-      "key": "family-protection-botid",
-      "method": "familyProtectionBotid"
-    },
-    {
-      "key": "enable-unknown-contact-bottom-sheet",
-      "method": "enableUnknownContactBottomSheet"
-    },
-    {
-      "key": "contact-add-bottom-sheet",
-      "method": "contactAddBottomSheet"
-    },
-    {
-      "key": "opcode-stat-config",
-      "method": "opcodeStatConfig"
-    },
-    {
-      "key": "inline-ev-player",
-      "method": "inlineEvPlayer"
-    },
-    {
-      "key": "channel-statistics-botid",
-      "method": "channelStatisticsBotid"
-    },
-    {
-      "key": "y-map",
-      "method": "getY-map"
-    },
-    {
-      "key": "ringtone-player-focus",
-      "method": "ringtonePlayerFocus"
-    },
-    {
-      "key": "hide-incoming-call-notif",
-      "method": "hideIncomingCallNotif"
-    },
-    {
-      "key": "two-account-mvp",
-      "method": "twoAccountMvp"
-    },
-    {
-      "key": "new-collage",
-      "method": "newCollage"
-    },
-    {
-      "key": "reactions-sync-time",
-      "method": "reactionsSyncTime"
-    },
-    {
-      "key": "min-sound-hearable-level",
-      "method": "minSoundHearableLevel"
-    },
-    {
-      "key": "official-org",
-      "method": "officialOrg"
-    },
-    {
-      "key": "org-profile",
-      "method": "orgProfile"
-    },
-    {
-      "key": "video-content-cache-ttl",
-      "method": "videoContentCacheTtl"
-    },
-    {
-      "key": "audio-play-cache-ttl",
-      "method": "audioPlayCacheTtl"
-    },
-    {
-      "key": "chatlist-subtitle-ver",
-      "method": "chatlistSubtitleVer"
-    },
-    {
-      "key": "join-requests",
-      "method": "joinRequests"
-    },
-    {
-      "key": "new-year-theme-2026",
-      "method": "newYearTheme2026"
-    },
-    {
-      "key": "horizontal-call-mode",
-      "method": "horizontalCallMode"
-    },
-    {
-      "key": "white-list-links",
-      "method": "whiteListLinks"
-    },
-    {
-      "key": "set-audio-device",
-      "method": "setAudioDevice"
-    },
-    {
-      "key": "system-default-ringtone-opt",
-      "method": "systemDefaultRingtoneOpt"
-    },
-    {
-      "key": "ringtone-content-type",
-      "method": "ringtoneContentType"
-    },
-    {
-      "key": "webapp-push-open",
-      "method": "webappPushOpen"
-    },
-    {
-      "key": "webapp-exc",
-      "method": "getWebapp-exc"
-    },
-    {
-      "key": "reactions-settings-enabled",
-      "method": "reactionsSettingsEnabled"
-    },
-    {
-      "key": "default-reactions-settings",
-      "method": "getDefault-reactions-settings"
-    },
-    {
-      "key": "non-contact-complaints-enabled",
-      "method": "nonContactComplaintsEnabled"
-    },
-    {
-      "key": "ov-media-send-enabled",
-      "method": "ovMediaSendEnabled"
-    },
-    {
-      "key": "typing-send-enabled",
-      "method": "typingSendEnabled"
-    },
-    {
-      "key": "cis-enabled",
-      "method": "cisEnabled"
-    },
-    {
-      "key": "channels-suggests-folder",
-      "method": "channelsSuggestsFolder"
-    },
-    {
-      "key": "video-fast-seek-enabled",
-      "method": "videoFastSeekEnabled"
-    },
-    {
-      "key": "log-violations",
-      "method": "logViolations"
-    },
-    {
-      "key": "new-media-edit-screen",
-      "method": "newMediaEditScreen"
-    },
-    {
-      "key": "stickers-db-batch",
-      "method": "stickersDbBatch"
-    },
-    {
-      "key": "host-reachability",
-      "method": "hostReachability"
-    },
-    {
-      "key": "dps",
-      "method": "dps"
-    },
-    {
-      "key": "error-stat-limit",
-      "method": "errorStatLimit"
-    },
-    {
-      "key": "upload-hang-barrier",
-      "method": "uploadHangBarrier"
-    },
-    {
-      "key": "memory-slice-interval",
-      "method": "memorySliceInterval"
-    },
-    {
-      "key": "push-delivery",
-      "method": "getPush-delivery"
-    },
-    {
-      "key": "battery-slice-interval",
-      "method": "batterySliceInterval"
-    },
-    {
-      "key": "render-polls",
-      "method": "renderPolls"
-    },
-    {
-      "key": "polls-in-p2p-chats",
-      "method": "pollsInP2pChats"
-    },
-    {
-      "key": "polls-in-p2g-chats",
-      "method": "pollsInP2gChats"
-    },
-    {
-      "key": "polls-in-channels",
-      "method": "pollsInChannels"
-    },
-    {
-      "key": "poll-ttl",
-      "method": "getPoll-ttl"
-    },
-    {
-      "key": "chat-history-warm-opts",
-      "method": "chatHistoryWarmOpts"
-    },
-    {
-      "key": "chat-history-warm-fail-interval",
-      "method": "chatHistoryWarmFailInterval"
-    },
-    {
-      "key": "chat-history-notif-msg-strategy",
-      "method": "chatHistoryNotifMsgStrategy"
-    },
-    {
-      "key": "chat-history-persist",
-      "method": "chatHistoryPersist"
-    },
-    {
-      "key": "chat-history-login-count",
-      "method": "chatHistoryLoginCount"
-    },
-    {
-      "key": "enable-filters-for-folders",
-      "method": "enableFiltersForFolders"
-    },
-    {
-      "key": "min-free-available-space-mb",
-      "method": "minFreeAvailableSpaceMb"
-    },
-    {
-      "key": "net-session-suppress-bad-disconnected-state",
-      "method": "netSessionSuppressBadDisconnectedState"
-    },
-    {
-      "key": "net-ssl-session-validate",
-      "method": "netSslSessionValidate"
-    },
-    {
-      "key": "net-session-rbc-enabled",
-      "method": "netSessionRbcEnabled"
-    },
-    {
-      "key": "csnl",
-      "method": "csnl"
-    },
-    {
-      "key": "bots-channel-adding",
-      "method": "botsChannelAdding"
-    },
-    {
-      "key": "debug-broken-contact",
-      "method": "debugBrokenContact"
-    },
-    {
-      "key": "chats-multi-select",
-      "method": "chatsMultiSelect"
-    },
-    {
-      "key": "db-query-ex-count",
-      "method": "dbQueryExCount"
-    },
-    {
-      "key": "db-tr-ex-count",
-      "method": "dbTrExCount"
-    },
-    {
-      "key": "wm-ex-count",
-      "method": "wmExCount"
-    },
-    {
-      "key": "speedy-upload",
-      "method": "speedyUpload"
-    },
-    {
-      "key": "audio-play-opus",
-      "method": "audioPlayOpus"
-    },
-    {
-      "key": "audio-download-fallback",
-      "method": "audioDownloadFallback"
-    },
-    {
-      "key": "audio-prefetch",
-      "method": "audioPrefetch"
-    },
-    {
-      "key": "video-prefetch",
-      "method": "videoPrefetch"
-    },
-    {
-      "key": "video-prefetch-max-duration",
-      "method": "videoPrefetchMaxDuration"
-    },
-    {
-      "key": "prefetch-no-workers",
-      "method": "getPrefetch-no-workers"
-    },
-    {
-      "key": "open-video-from-start",
-      "method": "openVideoFromStart"
-    },
-    {
-      "key": "speedy-voice-messages",
-      "method": "speedyVoiceMessages"
-    },
-    {
-      "key": "system-thread-pool-queue",
-      "method": "getSystem-thread-pool-queue"
-    },
-    {
-      "key": "watchdog-config",
-      "method": "getWatchdog-config"
-    },
-    {
-      "key": "fresco-executor",
-      "method": "getFresco-executor"
-    },
-    {
-      "key": "february-23-26-theme",
-      "method": "february2326Theme"
-    },
-    {
-      "key": "march-8-26-theme",
-      "method": "march826Theme"
-    },
-    {
-      "key": "stickers-botid",
-      "method": "stickersBotid"
-    },
-    {
-      "key": "sticker-set-edit-enabled",
-      "method": "stickerSetEditEnabled"
-    },
-    {
-      "key": "invalidate-db-msg-exception",
-      "method": "invalidateDbMsgException"
-    },
-    {
-      "key": "invalidate-db-force",
-      "method": "invalidateDbForce"
-    },
-    {
-      "key": "webapp-pr",
-      "method": "getWebapp-pr"
-    },
-    {
-      "key": "log-messages-meta",
-      "method": "logMessagesMeta"
-    },
-    {
-      "key": "log-chat-meta",
-      "method": "logChatMeta"
-    },
-    {
-      "key": "presence-ttl",
-      "method": "presenceTtl"
-    },
-    {
-      "key": "presence-view-port",
-      "method": "presenceViewPort"
-    },
-    {
-      "key": "presence-external",
-      "method": "presenceExternal"
-    },
-    {
-      "key": "presence-seen-eq",
-      "method": "presenceSeenEq"
-    },
-    {
-      "key": "presence-stat",
-      "method": "presenceStat"
-    },
-    {
-      "key": "presence-call-fix",
-      "method": "getPresence-call-fix"
-    },
-    {
-      "key": "presence-handle-error-fix",
-      "method": "getPresence-handle-error-fix"
-    },
-    {
-      "key": "presence-reset-update-time",
-      "method": "getPresence-reset-update-time"
-    },
-    {
-      "key": "presence-keep-bg-cache",
-      "method": "presenceKeepBgCache"
-    },
-    {
-      "key": "notif-typing-presence",
-      "method": "notifTypingPresence"
-    },
-    {
-      "key": "presence-offline-move-timeout",
-      "method": "presenceOfflineMoveTimeout"
-    },
-    {
-      "key": "presence-offline-log",
-      "method": "getPresence-offline-log"
-    },
-    {
-      "key": "presence-by-timer",
-      "method": "getPresence-by-timer"
-    },
-    {
-      "key": "chat-mark-batch-fail-interval",
-      "method": "chatMarkBatchFailInterval"
-    },
-    {
-      "key": "multi-select-bars-redesign",
-      "method": "multiSelectBarsRedesign"
-    },
-    {
-      "key": "pub-search-limit",
-      "method": "pubSearchLimit"
-    },
-    {
-      "key": "client-conv-id",
-      "method": "clientConvId"
-    },
-    {
-      "key": "settings-business",
-      "method": "settingsBusiness"
-    },
-    {
-      "key": "enable-audio-messages-transcription",
-      "method": "enableAudioMessagesTranscription"
-    },
-    {
-      "key": "enable-video-messages-transcription",
-      "method": "enableVideoMessagesTranscription"
-    },
-    {
-      "key": "retry-transcribe-attempt",
-      "method": "retryTranscribeAttempt"
-    },
-    {
-      "key": "retry-transcribe-timeout",
-      "method": "retryTranscribeTimeout"
-    },
-    {
-      "key": "media-not-ready-retry-delay",
-      "method": "mediaNotReadyRetryDelay"
-    },
-    {
-      "key": "calc-audio-wave",
-      "method": "calcAudioWave"
-    },
-    {
-      "key": "calc-video-wave",
-      "method": "calcVideoWave"
-    },
-    {
-      "key": "audio-peaks-count",
-      "method": "audioPeaksCount"
-    },
-    {
-      "key": "keep-background-socket",
-      "method": "getKeep-background-socket"
-    },
-    {
-      "key": "ping-background-interval",
-      "method": "pingBackgroundInterval"
-    },
-    {
-      "key": "spin-lock-enabled",
-      "method": "spinLockEnabled"
-    },
-    {
-      "key": "dns-seq-stat",
-      "method": "getDns-seq-stat"
-    },
-    {
-      "key": "digitalid-botid",
-      "method": "digitalidBotid"
-    },
-    {
-      "key": "story",
-      "method": "story"
-    },
-    {
-      "key": "opus-recorder",
-      "method": "opusRecorder"
-    },
-    {
-      "key": "opus-recorder-bitrate",
-      "method": "opusRecorderBitrate"
-    },
-    {
-      "key": "opus-recorder-sample-rate",
-      "method": "opusRecorderSampleRate"
-    },
-    {
-      "key": "glyph-warm",
-      "method": "glyphWarm"
-    },
-    {
-      "key": "informer-divider-can-hidden",
-      "method": "informerDividerCanHidden"
-    },
-    {
-      "key": "informer-coloring",
-      "method": "informerColoring"
-    },
-    {
-      "key": "live-streams",
-      "method": "liveStreams"
-    },
-    {
-      "key": "live-streams-url-prefix",
-      "method": "liveStreamsUrlPrefix"
-    },
-    {
-      "key": "phone-privacy-config",
-      "method": "phonePrivacyConfig"
-    },
-    {
-      "key": "contacts-settings-move",
-      "method": "contactsSettingsMove"
-    },
-    {
-      "key": "new-intent-fix",
-      "method": "newIntentFix"
-    },
-    {
-      "key": "push-check",
-      "method": "pushCheck"
-    },
-    {
-      "key": "calls-fakeboss-incoming-call-enabled",
-      "method": "callsFakebossIncomingCallEnabled"
-    },
-    {
-      "key": "incoming-call-orgs",
-      "method": "incomingCallOrgsEnabled"
-    },
-    {
-      "key": "show-vpn-chat-bottomsheet",
-      "method": "showVpnChatBottomsheet"
-    },
-    {
-      "key": "show-vpn-call-bottomsheet",
-      "method": "showVpnCallBottomsheet"
-    },
-    {
-      "key": "not-contact-placeholder",
-      "method": "notContactPlaceholder"
-    },
-    {
-      "key": "comments-enabled",
-      "method": "commentsEnabled"
-    },
-    {
-      "key": "cancel-stale-notifications",
-      "method": "getCancel-stale-notifications"
-    },
-    {
-      "key": "mediasaves-context",
-      "method": "getMediasaves-context"
-    },
-    {
-      "key": "mediasaves-menu",
-      "method": "getMediasaves-menu"
-    },
-    {
-      "key": "show-vpn-snackbar",
-      "method": "getShow-vpn-snackbar"
-    },
-    {
-      "key": "calls-android-simulcast-sw-vp8",
-      "method": "getCalls-android-simulcast-sw-vp8"
-    },
-    {
-      "key": "calls-sdk-simulcast",
-      "method": "getCalls-sdk-simulcast"
-    },
-    {
-      "key": "channel-view-config",
-      "method": "getChannel-view-config"
-    },
-    {
-      "key": "read-listener-fix",
-      "method": "getRead-listener-fix"
-    },
-    {
-      "key": "media-thumbhash",
-      "method": "getMedia-thumbhash"
-    },
-    {
-      "key": "webapp-phone-hash",
-      "method": "getWebapp-phone-hash"
-    },
-    {
-      "key": "adapt-bubble-width",
-      "method": "getAdapt-bubble-width"
-    },
-    {
-      "key": "calls-android-signaling-to",
-      "method": "getCalls-android-signaling-to"
-    },
-    {
-      "key": "new-avatar-gradient-colors-enabled",
-      "method": "getNew-avatar-gradient-colors-enabled"
-    },
-    {
-      "key": "calls-android-ssttl",
-      "method": "getCalls-android-ssttl"
-    },
-    {
-      "key": "fix-folders-counter",
-      "method": "getFix-folders-counter"
-    },
-    {
-      "key": "blocked-users",
-      "method": "getBlocked-users"
-    },
-    {
-      "key": "informer-icon-themed",
-      "method": "getInformer-icon-themed"
-    },
-    {
-      "key": "organization-placeholder",
-      "method": "getOrganization-placeholder"
-    },
-    {
-      "key": "ilm",
-      "method": "getIlm"
-    },
-    {
-      "key": "worker-early-fg",
-      "method": "getWorker-early-fg"
-    },
-    {
-      "key": "worker-download-fg-fix",
-      "method": "getWorker-download-fg-fix"
-    },
-    {
-      "key": "call-ping-fix",
-      "method": "getCall-ping-fix"
-    },
-    {
-      "key": "fix-presense-lock",
-      "method": "getFix-presense-lock"
-    },
-    {
-      "key": "messages-loader-behind",
-      "method": "getMessages-loader-behind"
-    },
-    {
-      "key": "stories-config",
-      "method": "getStories-config"
-    }
-  ],
-  "holder_smali": "smali/uwc.smali"
+    "class": "ru.ok.tamtam.android.prefs.PmsKey",
+    "powered_by": "t.me/teamkomet",
+    "total_keys": 332,
+    "keys": [
+        "set-unread-timeout",
+        "proxy",
+        "debug-mode",
+        "min-log-level",
+        "user-debug-report",
+        "android-use-logcat-logger",
+        "proxy-domains",
+        "image-width",
+        "image-height",
+        "image-quality",
+        "image-size",
+        "max-msg-length",
+        "max-participants",
+        "max-added-participants",
+        "max-audio-length",
+        "max-theme-length",
+        "max-description-length",
+        "edit-timeout",
+        "chats-page-size",
+        "keep-connection",
+        "invite-link",
+        "invite-short",
+        "invite-long",
+        "invite-header",
+        "file-upload-max-size",
+        "file-upload-unsupported-types",
+        "chats-preload-period",
+        "max-favorite-chats",
+        "disconnect-timeout",
+        "max-attach-count",
+        "support-account",
+        "support-email",
+        "wakelock-on-push",
+        "mentions_entity_names_limit",
+        "max-readmarks",
+        "delete-msg-fys-large-chat-disabled",
+        "max-video-duration-download",
+        "max-favorite-stickers",
+        "max-favorite-sticker-sets",
+        "min-sticker-size",
+        "max-sticker-size",
+        "default-sticker-size",
+        "min-image-side-size",
+        "min-duration-save-audio-start-time",
+        "valid-interval-audio-start-time",
+        "min-duration-playback-speed",
+        "drafts-sync-enabled",
+        "audio-transcription-locales",
+        "scheduled-messages-enabled",
+        "scheduled-posts-enabled",
+        "scheduled-faves-enabled",
+        "delete-message-from-reply",
+        "tracer-non-fatal-crashed-enabled",
+        "subscription-timeout-seconds",
+        "reactions-max",
+        "react-errors",
+        "msg-get-reactions-page-size",
+        "wm-workers-limit",
+        "wm-check-workers-count-interval-sec",
+        "wm-backlog-worker-check-delay-sec",
+        "wm-backlog-worker-backoff-delay-sec",
+        "wm-workers-offset",
+        "wm-analytics-enabled",
+        "progress-diff-for-notify",
+        "worker-progress-time-diff-for-notify-ms",
+        "max-downloaded-size-for-notify-kb",
+        "fb-exec-replace",
+        "fb-exec-modifiers-names",
+        "log-full",
+        "log-sensitive",
+        "anr-config",
+        "debug-profile-info",
+        "calls-endpoint",
+        "fake-chats",
+        "channels-enabled",
+        "available-complaints",
+        "in-app-review-triggers",
+        "fake-in-app-review",
+        "invite-friends-sheet-frequency",
+        "welcome-sticker-ids",
+        "money-transfer-botid",
+        "non-contact-sync-time",
+        "non-contact-max-chunk-size",
+        "non-contact-collection-interval",
+        "edit-chat-type-screen-enabled",
+        "group-call-part-limit",
+        "gc-from-p2p",
+        "gc-link-pre-settings",
+        "gc-wait-admin",
+        "call-pinch-to-zoom",
+        "early-call-start",
+        "outgoing-call-uri",
+        "account-nickname-enabled",
+        "send-location-enabled",
+        "reconnect-call-ringtone",
+        "media-viewer-rotation-enabled",
+        "mytracker-enabled",
+        "chat-video-autoplay-parallel-count",
+        "bot-complaint-enabled",
+        "calls-sdk-am-speaker-fix",
+        "calls-sdk-wt-enabled",
+        "calls-sdk-session-state",
+        "calls-sdk-webrtc-logs",
+        "calls-sdk-traffic-markup",
+        "calls-sdk-ai-opus-bwe",
+        "calls-sdk-linear-opus-bwe",
+        "calls-use-p2p-relay",
+        "calls-use-p2p-relay-caps",
+        "calls-skip-legacy-ice-restart",
+        "calls-sdk-incall-stat",
+        "calls-android-direct-ice-restart",
+        "calls-android-no-ice-restart",
+        "calls-android-vtv2",
+        "calls-android-lla",
+        "calls-android-nidm",
+        "calls-android-ice-cps",
+        "calls-android-h265-s",
+        "calls-android-early-create-pc",
+        "calls-android-signaling-ip",
+        "calls-android-fast-join",
+        "calls-android-ns",
+        "calls-android-ac",
+        "calls-android-new-pms",
+        "calls-sdk-h265-prioritized",
+        "calls-android-wtp",
+        "call-permissions-interval",
+        "energy-saving-request-interval",
+        "energy-saving-bottom-sheet",
+        "calls-sdk-disable-pipeline",
+        "calls-sdk-log-audio",
+        "calls-android-update-endpoint-params",
+        "calls-android-simulcast-sw-vp8",
+        "calls-sdk-dnt-disable-audio",
+        "calls-sdk-opus-adapt",
+        "calls-android-early-set-offer",
+        "calls-android-gen-peerid",
+        "cfs",
+        "ab-status",
+        "conn-timeouts",
+        "media-transform",
+        "video-transcoding-class",
+        "media-thumbhash",
+        "call-rate",
+        "call-chat-members-load-config",
+        "send-queue-size",
+        "webapp-ds-keys-count",
+        "webapp-ss-keys-count",
+        "create-channel-type-screen",
+        "edit-channel-type-screen-enabled",
+        "saved-messages-aliases",
+        "video-msg-config",
+        "stat-session-background-threshold",
+        "bot-start-param",
+        "migrate-unsafe-warn",
+        "media-order",
+        "bad-networ-indicator-config",
+        "analytics-enabled",
+        "mytracker-log-level",
+        "search-webapps-showcase",
+        "player-load-control",
+        "settings-entry-banners",
+        "folders-max-count",
+        "net-client-dns-enabled",
+        "creation-2fa-config",
+        "one-video-player",
+        "one-video-failover",
+        "one-video-uploader-config",
+        "y-map",
+        "views-count-enabled",
+        "webview-cache-enabled",
+        "quotes-enabled",
+        "upload-video-config",
+        "devnull",
+        "perf-events",
+        "perf-registrar-config",
+        "server-side-complains-enabled",
+        "channels-complaint-enabled",
+        "landscape",
+        "utm-tag-for-trigger-link-share",
+        "media-playlist-enabled",
+        "show-warning-links",
+        "video-msg-download-urls-hack-enabled",
+        "net-stat-config",
+        "informer-enabled",
+        "camera-freeze-detector-timeout",
+        "family-protection-botid",
+        "enable-unknown-contact-bottom-sheet",
+        "contact-add-bottom-sheet",
+        "opcode-stat-config",
+        "inline-ev-player",
+        "channel-statistics-botid",
+        "ringtone-player-focus",
+        "hide-incoming-call-notif",
+        "two-account-mvp",
+        "login-fail-logic-skip-re-login-on-network-error",
+        "drop-old-session-login",
+        "new-collage",
+        "reactions-sync-time",
+        "min-sound-hearable-level",
+        "push-delivery",
+        "official-org",
+        "org-profile",
+        "video-content-cache-ttl",
+        "audio-play-cache-ttl",
+        "chatlist-subtitle-ver",
+        "join-requests",
+        "new-year-theme-2026",
+        "horizontal-call-mode",
+        "white-list-links",
+        "set-audio-device",
+        "system-default-ringtone-opt",
+        "ringtone-content-type",
+        "webapp-push-open",
+        "webapp-exc",
+        "reactions-settings-enabled",
+        "default-reactions-settings",
+        "non-contact-complaints-enabled",
+        "ov-media-send-enabled",
+        "typing-send-enabled",
+        "new-media-upload-ui",
+        "cis-enabled",
+        "channels-suggests-folder",
+        "video-fast-seek-enabled",
+        "log-violations",
+        "new-media-edit-screen",
+        "stickers-db-batch",
+        "host-reachability",
+        "dps",
+        "error-stat-limit",
+        "upload-hang-barrier",
+        "memory-slice-interval",
+        "battery-slice-interval",
+        "render-polls",
+        "polls-in-p2p-chats",
+        "polls-in-p2g-chats",
+        "polls-in-channels",
+        "poll-ttl",
+        "chat-history-warm-opts",
+        "chat-history-warm-fail-interval",
+        "chat-history-notif-msg-strategy",
+        "chat-history-persist",
+        "chat-history-login-count",
+        "enable-filters-for-folders",
+        "min-free-available-space-mb",
+        "net-session-suppress-bad-disconnected-state",
+        "net-ssl-session-validate",
+        "net-session-rbc-enabled",
+        "chat-save-view-position",
+        "multi-lang",
+        "csnl",
+        "bots-channel-adding",
+        "debug-broken-contact",
+        "chats-multi-select",
+        "db-query-ex-count",
+        "db-tr-ex-count",
+        "wm-ex-count",
+        "watchdog-config",
+        "system-thread-pool-queue",
+        "fresco-executor",
+        "speedy-upload",
+        "audio-play-opus",
+        "audio-download",
+        "audio-download-fallback",
+        "audio-prefetch",
+        "video-prefetch",
+        "video-prefetch-max-duration",
+        "open-video-from-start",
+        "speedy-voice-messages",
+        "february-23-26-theme",
+        "march-8-26-theme",
+        "channel-view-config",
+        "read-listener-fix",
+        "stickers-botid",
+        "sticker-set-edit-enabled",
+        "invalidate-db-msg-exception",
+        "invalidate-db-force",
+        "webapp-pr",
+        "log-messages-meta",
+        "log-chat-meta",
+        "presence-ttl",
+        "presence-view-port",
+        "presence-external",
+        "presence-seen-eq",
+        "presence-stat",
+        "presence-keep-bg-cache",
+        "notif-typing-presence",
+        "presence-offline-move-timeout",
+        "presence-offline-log",
+        "video-speed",
+        "chat-mark-batch-fail-interval",
+        "multi-select-bars-redesign",
+        "pub-search-limit",
+        "client-conv-id",
+        "settings-business",
+        "enable-audio-messages-transcription",
+        "enable-video-messages-transcription",
+        "retry-transcribe-attempt",
+        "retry-transcribe-timeout",
+        "media-not-ready-retry-delay",
+        "calc-audio-wave",
+        "calc-video-wave",
+        "audio-peaks-count",
+        "keep-background-socket",
+        "ping-background-interval",
+        "spin-lock-enabled",
+        "digitalid-botid",
+        "blocked-users",
+        "story",
+        "opus-recorder",
+        "opus-recorder-bitrate",
+        "opus-recorder-sample-rate",
+        "glyph-warm",
+        "informer-divider-can-hidden",
+        "live-streams",
+        "live-streams-url-prefix",
+        "phone-privacy-config",
+        "contacts-settings-move",
+        "new-intent-fix",
+        "push-check",
+        "calls-fakeboss-incoming-call-enabled",
+        "show-vpn-chat-bottomsheet",
+        "show-vpn-call-bottomsheet",
+        "not-contact-placeholder",
+        "comments-enabled",
+        "cancel-stale-notifications",
+        "mediasaves-context",
+        "mediasaves-menu",
+        "show-vpn-snackbar",
+        "webapp-phone-hash",
+        "adapt-bubble-width",
+        "organization-placeholder",
+        "prefs_release"
+    ]
 }
