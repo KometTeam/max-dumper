@@ -18,12 +18,12 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Set up JDK 8
-        uses: actions/setup-java@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
-          java-version: '8'
-          distribution: 'adopt'
-        
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Install Dependencies
         run: |
           sudo apt-get update
@@ -35,19 +35,11 @@ jobs:
 
       - name: Decompile APK
         run: |
-          apktool d app.apk -o decompiled_out
+          apktool d -f app.apk -o decompiled_out
 
-      - name: Run Parser Script
+      - name: Extract PmsKeys
         run: |
-          SMALI_PATH="decompiled_out/smali/ru/ok/tamtam/android/prefs/PmsKey.smali"
-          
-          if [ ! -f "$SMALI_PATH" ]; then
-            SMALI_PATH=$(find decompiled_out -name "PmsKey.smali" | head -n 1)
-          fi
-          
-          echo "Target file: $SMALI_PATH"
-          cp "$SMALI_PATH" ex.txt
-          python3 par.py > pmskeys.json
+          python3 pms_extract.py decompiled_out -o pmskeys.json --verbose
 
       - name: Commit and Push results
         id: commit_step
