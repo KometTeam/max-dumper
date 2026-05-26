@@ -1,9 +1,14 @@
-name: Dump APK from RuStore
+name: Dump APK from AppGallery
 
 on:
   workflow_dispatch:
+    inputs:
+      app_id:
+        description: 'AppGallery app-ID (напр. C113469599)'
+        required: false
+        default: 'C113469599'
   repository_dispatch:
-    types: [dump-apk]
+    types: [dump-apk-appgallery]
 
 permissions:
   contents: write
@@ -11,75 +16,71 @@ permissions:
 jobs:
   dump-and-release:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      
+
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
 
       - name: Install apk-mitm
         run: npm install -g apk-mitm
-      
+
       - name: Download APK
         id: download
+        env:
+          APP_ID_INPUT:     ${{ github.event.inputs.app_id }}
+          APP_ID_DISPATCH:  ${{ github.event.client_payload.app_id }}
         run: |
-          PACKAGE="ru.oneme.app"
-          
-          python dumper.py "$PACKAGE"
-          
+          APP_ID="${APP_ID_INPUT:-${APP_ID_DISPATCH:-C113469599}}"
+          echo "Using APP_ID=$APP_ID"
+
+          python dumper_appgallery.py "$APP_ID"
+
           APP_INFO=$(cat app_info.json)
-          
           APK_FILE=$(ls *.apk | head -n 1)
           echo "file=$APK_FILE" >> $GITHUB_OUTPUT
-          
-          echo "package=$PACKAGE" >> $GITHUB_OUTPUT
+          echo "app_id=$APP_ID" >> $GITHUB_OUTPUT
+          echo "package=$(echo $APP_INFO | jq -r '.package')" >> $GITHUB_OUTPUT
           echo "version=$(echo $APP_INFO | jq -r '.version_name')" >> $GITHUB_OUTPUT
           echo "version_code=$(echo $APP_INFO | jq -r '.version_code')" >> $GITHUB_OUTPUT
           echo "min_sdk=$(echo $APP_INFO | jq -r '.min_sdk_version')" >> $GITHUB_OUTPUT
           echo "target_sdk=$(echo $APP_INFO | jq -r '.target_sdk_version')" >> $GITHUB_OUTPUT
-          
-          echo "whats_new<<EOF" >> $GITHUB_OUTPUT
-          jq -r '.whats_new' app_info.json >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Patch APK with apk-mitm
         id: patch
         run: |
           APK_FILE="${{ steps.download.outputs.file }}"
           PATCHED_FILE="${APK_FILE%.apk}-patched.apk"
-          
+
           apk-mitm "$APK_FILE" || true
-          
+
           if [ -f "$PATCHED_FILE" ]; then
             echo "patched_file=$PATCHED_FILE" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: "${{ steps.download.outputs.package }}-v${{ steps.download.outputs.version }}-rustore"
-          name: "${{ steps.download.outputs.package }} v${{ steps.download.outputs.version }} (RuStore)"
+          tag_name: "${{ steps.download.outputs.package }}-v${{ steps.download.outputs.version }}-appgallery"
+          name: "${{ steps.download.outputs.package }} v${{ steps.download.outputs.version }} (AppGallery)"
           body: |
-            📦 **APK дамп из RuStore**
-            
+            📦 **APK дамп из Huawei AppGallery**
+
             ### 📋 Информация о приложении
             - **Package:** `${{ steps.download.outputs.package }}`
+            - **AppGallery ID:** `${{ steps.download.outputs.app_id }}`
             - **Version:** `${{ steps.download.outputs.version }}` (build `${{ steps.download.outputs.version_code }}`)
             - **Min SDK:** Android `${{ steps.download.outputs.min_sdk }}`
             - **Target SDK:** Android `${{ steps.download.outputs.target_sdk }}`
-            
-            ### ✨ Что нового
-            ```
-            ${{ steps.download.outputs.whats_new }}
-            ```
+
             🔓 `*-patched.apk` — версия с отключённым SSL pinning
           files: |
             ${{ steps.download.outputs.file }}
