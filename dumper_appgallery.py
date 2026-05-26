@@ -19,7 +19,50 @@ from tqdm import tqdm
 
 DEFAULT_APP_ID = "C113469599"
 APPDL_URL      = "https://appgallery.cloud.huawei.com/appdl/{app_id}"
-UA             = "Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36"
+API_BASE       = "https://web-drcn.hispace.dbankcloud.com"
+UA             = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
+
+
+def fetch_whats_new(app_id: str) -> str:
+    """
+    Достаёт changelog ("Обновления") из подписанного AppGallery API.
+    Возвращает текст или пустую строку, если не получилось.
+    """
+    import time as _t
+    try:
+        s = requests.Session()
+        r = s.get(f"{API_BASE}/webedge/getInterfaceCode",
+                  headers={"User-Agent": UA,
+                           "Referer": "https://appgallery.huawei.com/"},
+                  timeout=10)
+        r.raise_for_status()
+        code = r.text.strip().strip('"')
+        ts = int(_t.time() * 1000)
+        r = s.get(f"{API_BASE}/uowap/index", params={
+            "method":      "internal.getTabDetail",
+            "serviceType": "20",
+            "reqPageNum":  "1",
+            "maxResults":  "25",
+            "uri":         f"app|{app_id}",
+            "locale":      "ru",
+        }, headers={
+            "User-Agent":     UA,
+            "Referer":        "https://appgallery.huawei.com/",
+            "interface-code": f"{code}_{ts}",
+        }, timeout=15)
+        r.raise_for_status()
+        data = r.json()
+        if data.get("rtnCode") != 0:
+            return ""
+        for layout in data.get("layoutData", []):
+            if layout.get("layoutName") == "detailprizecard":
+                items = layout.get("dataList") or []
+                if items:
+                    return (items[0].get("body") or "").strip()
+        return ""
+    except Exception as e:
+        print(f"Не удалось получить whats_new: {e}", file=sys.stderr)
+        return ""
 
 
 def download_appgallery_apk(app_id: str = DEFAULT_APP_ID, output_dir: str = "."):
@@ -57,14 +100,15 @@ def download_appgallery_apk(app_id: str = DEFAULT_APP_ID, output_dir: str = ".")
     try:
         apk = APK(output_path)
 
+        whats_new = fetch_whats_new(app_id) or "Информация отсутствует"
+
         app_info = {
             "package":            apk.package,
             "version_name":       apk.version_name,
             "version_code":       apk.version_code,
             "min_sdk_version":    apk.get_min_sdk_version(),
             "target_sdk_version": apk.get_target_sdk_version(),
-            # AppGallery не отдаёт changelog в appdl-эндпоинте
-            "whats_new":          "Информация отсутствует (источник: AppGallery)",
+            "whats_new":          whats_new,
             "source":             "appgallery",
             "appgallery_id":      app_id,
         }

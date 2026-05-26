@@ -54,6 +54,10 @@ jobs:
           echo "min_sdk=$(echo $APP_INFO | jq -r '.min_sdk_version')" >> $GITHUB_OUTPUT
           echo "target_sdk=$(echo $APP_INFO | jq -r '.target_sdk_version')" >> $GITHUB_OUTPUT
 
+          echo "whats_new<<EOF" >> $GITHUB_OUTPUT
+          jq -r '.whats_new' app_info.json >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Patch APK with apk-mitm
         id: patch
         run: |
@@ -81,6 +85,10 @@ jobs:
             - **Min SDK:** Android `${{ steps.download.outputs.min_sdk }}`
             - **Target SDK:** Android `${{ steps.download.outputs.target_sdk }}`
 
+            ### ✨ Что нового
+            ```
+            ${{ steps.download.outputs.whats_new }}
+            ```
             🔓 `*-patched.apk` — версия с отключённым SSL pinning
           files: |
             ${{ steps.download.outputs.file }}
