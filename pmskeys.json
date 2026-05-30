@@ -1,7 +1,7 @@
 {
     "class": "one.me.sdk.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 344,
+    "total_keys": 350,
     "keys": [
         "set-unread-timeout",
         "proxy",
@@ -32,6 +32,7 @@
         "file-upload-max-size",
         "file-upload-unsupported-types",
         "chats-preload-period",
+        "chats-preload-period-read-mark",
         "max-favorite-chats",
         "disconnect-timeout",
         "hash",
@@ -172,6 +173,7 @@
         "upload-on-fail-trnscd",
         "upload-error-retry",
         "upload-compress-lvl",
+        "upload-channel-group",
         "devnull",
         "perf-events",
         "perf-registrar-config",
@@ -205,6 +207,7 @@
         "join-requests",
         "new-year-theme-2026",
         "horizontal-call-mode",
+        "call-screen-hide-gesture",
         "white-list-links",
         "set-audio-device",
         "system-default-ringtone-opt",
@@ -237,6 +240,9 @@
         "chat-history-warm-opts",
         "chat-history-warm-fail-interval",
         "chat-history-notif-msg-strategy",
+        "notif-msg-insert-chunk",
+        "single-chunks-clear-period",
+        "chat-max-chunks",
         "chat-history-persist",
         "chat-history-login-count",
         "enable-filters-for-folders",
@@ -252,7 +258,6 @@
         "db-tr-ex-count",
         "wm-ex-count",
         "speedy-upload",
-        "audio-play-opus",
         "audio-download-fallback",
         "audio-prefetch",
         "video-prefetch",
@@ -282,6 +287,7 @@
         "presence-reset-update-time",
         "presence-keep-bg-cache",
         "notif-typing-presence",
+        "notif-mark-presence",
         "presence-offline-move-timeout",
         "presence-offline-log",
         "presence-by-timer",
@@ -304,7 +310,6 @@
         "dns-seq-stat",
         "digitalid-botid",
         "story",
-        "opus-recorder",
         "opus-recorder-bitrate",
         "opus-recorder-sample-rate",
         "glyph-warm",
@@ -346,6 +351,7 @@
         "call-ping-fix",
         "fix-presense-lock",
         "messages-loader-behind",
-        "stories-config"
+        "stories-config",
+        "webview-restore-locale"
     ]
 }
