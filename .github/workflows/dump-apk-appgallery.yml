@@ -97,3 +97,12 @@ jobs:
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # GitHub блокирует цепочки workflows из релизов, созданных GITHUB_TOKEN
+      # (защита от рекурсии). Поэтому parser.yml не триггерится автоматически
+      # на release: published. Запускаем его явно через workflow_dispatch —
+      # это исключение, и GITHUB_TOKEN здесь работает.
+      - name: Trigger parser workflow
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run parser.yml --repo "${{ github.repository }}"
