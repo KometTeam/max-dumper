@@ -6,7 +6,8 @@ on:
     types: [dump-apk]
 
 permissions:
-  contents: write
+  contents: write   # создать релиз
+  actions:  write   # дёрнуть parser.yml через workflow_dispatch
 
 jobs:
   dump-and-release:
