@@ -1,7 +1,7 @@
 {
     "class": "one.me.sdk.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 359,
+    "total_keys": 360,
     "keys": [
         "set-unread-timeout",
         "proxy",
@@ -130,6 +130,7 @@
         "calls-sdk-h265-prioritized",
         "calls-android-wtp",
         "call-permissions-interval",
+        "call-phone-recall-timeout",
         "energy-saving-request-interval",
         "energy-saving-bottom-sheet",
         "calls-sdk-disable-pipeline",
