@@ -1,7 +1,7 @@
 {
     "class": "one.me.sdk.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 376,
+    "total_keys": 378,
     "keys": [
         "set-unread-timeout",
         "debug-mode",
@@ -378,6 +378,8 @@
         "open-channels-link",
         "open-channels-max-channel-count",
         "channel-name-check-debounce-ms",
-        "open-channels-animoji-id"
+        "open-channels-animoji-id",
+        "rustore-push-mode",
+        "channels-folder-onboarding-enabled"
     ]
 }
