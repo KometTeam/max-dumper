@@ -1,7 +1,7 @@
 {
     "class": "one.me.sdk.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 377,
+    "total_keys": 378,
     "keys": [
         "set-unread-timeout",
         "debug-mode",
@@ -177,6 +177,7 @@
         "upload-channel-group",
         "upload-cleanup",
         "upload-worker-restart",
+        "upload-worker-restart-v2",
         "videomsg_record_release",
         "devnull",
         "perf-events",
