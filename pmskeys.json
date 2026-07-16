@@ -1,7 +1,7 @@
 {
     "class": "one.me.sdk.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 378,
+    "total_keys": 392,
     "keys": [
         "set-unread-timeout",
         "debug-mode",
@@ -76,6 +76,7 @@
         "calls-endpoint",
         "fake-chats",
         "channels-enabled",
+        "guarded-recycler-dispatch",
         "available-complaints",
         "in-app-review-triggers",
         "fake-in-app-review",
@@ -130,6 +131,7 @@
         "call-phone-recall-timeout",
         "energy-saving-request-interval",
         "energy-saving-bottom-sheet",
+        "comments-push",
         "calls-sdk-disable-pipeline",
         "calls-sdk-log-audio",
         "calls-sdk-dnt-disable-audio",
@@ -162,7 +164,9 @@
         "player-load-control",
         "settings-entry-banners",
         "folders-max-count",
+        "folders-warm-up",
         "net-client-dns-enabled",
+        "icmp-ping",
         "creation-2fa-config",
         "one-video-player",
         "one-video-failover",
@@ -305,6 +309,7 @@
         "spin-lock-enabled",
         "dns-seq-stat",
         "digitalid-botid",
+        "did-onboarding",
         "stories",
         "stories-config",
         "stories-chats",
@@ -330,6 +335,10 @@
         "comments-counters-ttl",
         "get-comments-updates-page-size",
         "comments-reactions-enabled",
+        "comments-notif-message",
+        "comments-notif-delete",
+        "comments-notif-delete-range",
+        "comments-notif-react",
         "confirm-send",
         "cancel-stale-notifications",
         "mediasaves-context",
@@ -373,6 +382,7 @@
         "channel-name-check-debounce-ms",
         "open-channels-animoji-id",
         "rustore-push-mode",
+        "rustore-log-ex",
         "webapp-entry-from-chats-and-search-enabled",
         "channels-folder-onboarding-enabled",
         "pending-tasks-max-count",
@@ -380,6 +390,10 @@
         "crit-log-fix",
         "channel-subscriptions-recs-limit",
         "loader-skip-same-event",
-        "hms-token-wait"
+        "hms-token-wait",
+        "db-corrupt-logout",
+        "calls-quick-audio-response",
+        "hide-unavailable-chats-to-forward",
+        "call-service-foreground-fix"
     ]
 }
