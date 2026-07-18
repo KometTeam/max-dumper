@@ -31,8 +31,17 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Install apk-mitm
-        run: npm install -g apk-mitm
+      - name: Install apk-mitm + fresh Apktool
+        # apk-mitm 1.3.0 несёт в комплекте apktool 2.9.3, который падает на
+        # свежих Material-атрибутах (state_dragged и т.п.) → patched.apk
+        # молча не собирается. Подсовываем актуальный apktool через --apktool.
+        run: |
+          npm install -g apk-mitm
+          APKTOOL_VER="3.0.2"
+          curl -sL "https://github.com/iBotPeaches/Apktool/releases/download/v${APKTOOL_VER}/apktool_${APKTOOL_VER}.jar" \
+            -o /tmp/apktool.jar
+          echo "APKTOOL_JAR=/tmp/apktool.jar" >> $GITHUB_ENV
+          echo "Downloaded Apktool v${APKTOOL_VER} ($(wc -c < /tmp/apktool.jar) bytes)"
 
       - name: Download APK
         id: download
@@ -65,10 +74,13 @@ jobs:
           APK_FILE="${{ steps.download.outputs.file }}"
           PATCHED_FILE="${APK_FILE%.apk}-patched.apk"
 
-          apk-mitm "$APK_FILE" || true
+          apk-mitm --apktool "$APKTOOL_JAR" "$APK_FILE" || true
 
           if [ -f "$PATCHED_FILE" ]; then
             echo "patched_file=$PATCHED_FILE" >> $GITHUB_OUTPUT
+            echo "✅ patched APK готов: $PATCHED_FILE"
+          else
+            echo "::warning::apk-mitm не собрал patched APK — релиз пойдёт без него"
           fi
 
       - name: Create Release
