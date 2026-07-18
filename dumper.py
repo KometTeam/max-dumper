@@ -7,18 +7,24 @@ from io import BytesIO
 from pyaxmlparser import APK
 from tqdm import tqdm
 
+# RuStore made this header mandatory in July 2026; requests without it get an empty HTTP 400.
+RUSTORE_HEADERS = {"ruStoreVerCode": "11000"}
+
 def download_rustore_apk(package_name, output_dir="."):
-    info = requests.get(f"https://backapi.rustore.ru/applicationData/overallInfo/{package_name}").json()
+    info = requests.get(
+        f"https://backapi.rustore.ru/applicationData/overallInfo/{package_name}",
+        headers=RUSTORE_HEADERS,
+    ).json()
     if info.get("code") != "OK":
         print("Приложение не найдено")
         return None
 
     whats_new = info.get("body", {}).get("whatsNew", "Информация отсутствует")
-    
+
     download_data = requests.post(
         "https://backapi.rustore.ru/applicationData/download-link",
         json={"appId": info["body"]["appId"], "firstInstall": True},
-        headers={"Content-Type": "application/json; charset=utf-8"}
+        headers={"Content-Type": "application/json; charset=utf-8", **RUSTORE_HEADERS}
     ).json()
     
     if download_data.get("code") != "OK":
