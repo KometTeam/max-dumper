@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+import re
 import sys
 import uuid
 import zipfile
@@ -173,6 +174,10 @@ def extract_apks(container, output_path):
         return False
 
 
+def version_tuple(v):
+    return tuple(int(x) for x in re.findall(r"\d+", v or ""))
+
+
 def split_suffix(path):
     """base для основного APK, иначе имя split'а (config.arm64_v8a и т.п.)."""
     try:
@@ -183,7 +188,8 @@ def split_suffix(path):
 
 
 def download_rustore_apk(package_name, output_dir=".", probes=1, splits=False,
-                         device_id=None, check_only=False, **device_kwargs):
+                         device_id=None, check_only=False, expect_version=None,
+                         **device_kwargs):
     if probes > 1:
         print(f"Опрос {probes} устройств...")
     client, info = pick_best_client(package_name, probes if not device_id else 1,
@@ -199,6 +205,15 @@ def download_rustore_apk(package_name, output_dir=".", probes=1, splits=False,
     print(f"Размер:   {info.get('fileSize')}")
     print(f"deviceId: {client.device_id}")
     print(f"{'=' * 40}")
+
+    # Раскатка идёт по deviceId, поэтому без нужного идентификатора можно
+    # молча скачать предыдущую версию и выложить её как релиз новой.
+    # Версия новее ожидаемой — не проблема: значит, обновление успело выйти.
+    got = info.get("versionName")
+    if expect_version and version_tuple(got) < version_tuple(expect_version):
+        print(f"Ожидалась версия {expect_version}, а API отдал {got} — прерываю, "
+              f"чтобы не выложить старую сборку (deviceId не попал в раскатку?)")
+        return None
 
     if check_only:
         return info
@@ -263,6 +278,8 @@ if __name__ == "__main__":
     p.add_argument("-n", "--probes", type=int, default=5,
                    help="сколько случайных deviceId опросить и взять самую свежую версию")
     p.add_argument("--device-id", help="фиксированный deviceId вместо случайных")
+    p.add_argument("--expect-version",
+                   help="ожидаемая versionName; при несовпадении выйти с ошибкой")
     p.add_argument("--splits", action="store_true",
                    help="скачать split-APK вместо универсального")
     p.add_argument("--check", action="store_true", help="только показать версию, без скачивания")
@@ -280,6 +297,7 @@ if __name__ == "__main__":
         splits=a.splits,
         device_id=a.device_id,
         check_only=a.check,
+        expect_version=a.expect_version,
         sdk=a.sdk,
         abis=a.abis.split(","),
         density=a.density,

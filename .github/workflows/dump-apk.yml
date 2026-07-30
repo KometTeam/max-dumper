@@ -2,6 +2,13 @@ name: Dump APK from RuStore
 
 on:
   workflow_dispatch:
+    inputs:
+      device_id:
+        description: 'deviceId, видящий нужную версию (пусто — опросить случайные)'
+        required: false
+      version:
+        description: 'Ожидаемая версия; при более старой дамп прерывается'
+        required: false
   repository_dispatch:
     types: [dump-apk]
 
@@ -40,11 +47,28 @@ jobs:
       
       - name: Download APK
         id: download
+        env:
+          # Бот присылает deviceId, который увидел новую версию, и саму версию.
+          # Без deviceId дампер сгенерирует свой и во время частичной раскатки
+          # может не попасть в ту же группу — тогда скачается предыдущая сборка.
+          DEVICE_ID:      ${{ github.event.client_payload.device_id || github.event.inputs.device_id }}
+          EXPECT_VERSION: ${{ github.event.client_payload.version || github.event.inputs.version }}
         run: |
           PACKAGE="ru.oneme.app"
-          
-          python dumper.py "$PACKAGE"
-          
+
+          ARGS=()
+          if [ -n "$DEVICE_ID" ]; then
+            echo "Использую deviceId от бота: $DEVICE_ID"
+            ARGS+=(--device-id "$DEVICE_ID")
+          else
+            echo "deviceId не передан (ручной запуск) — опрашиваю случайные"
+          fi
+          if [ -n "$EXPECT_VERSION" ]; then
+            ARGS+=(--expect-version "$EXPECT_VERSION")
+          fi
+
+          python dumper.py "$PACKAGE" "${ARGS[@]}"
+
           APP_INFO=$(cat app_info.json)
           
           APK_FILE=$(ls *.apk | head -n 1)
