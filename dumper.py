@@ -1,17 +1,58 @@
 import argparse
+import atexit
 import json
 import os
 import re
 import sys
+import tempfile
 import uuid
 import zipfile
 from io import BytesIO
+from urllib.parse import urlsplit
 
+import certifi
 import requests
 from pyaxmlparser import APK
 from tqdm import tqdm
 
 BASE = "https://backapi.rustore.ru"
+
+# CDN RuStore (static-m.rustore.ru) отдаёт сертификат от НУЦ Минцифры, которого
+# нет ни в certifi, ни в системном сторе — на чистой машине (например, на
+# раннере GitHub Actions) скачивание падает с CERTIFICATE_VERIFY_FAILED.
+# Доверяем этому корню точечно: только для хостов RuStore и только в дополнение
+# к обычному набору, чтобы проверка сертификатов нигде не отключалась.
+HERE = os.path.dirname(os.path.abspath(__file__))
+RUSSIAN_CA = os.path.join(HERE, "certs", "russian_trusted_ca.pem")
+TRUSTED_CA_SUFFIXES = (".rustore.ru",)
+
+_ca_bundle_path = None
+
+
+def ca_bundle():
+    """certifi + корень НУЦ Минцифры одним файлом (склеивается при первом вызове)."""
+    global _ca_bundle_path
+    if _ca_bundle_path is None:
+        if not os.path.exists(RUSSIAN_CA):
+            return certifi.where()
+        fd, path = tempfile.mkstemp(prefix="rustore-ca-", suffix=".pem")
+        with os.fdopen(fd, "wb") as out:
+            for src in (certifi.where(), RUSSIAN_CA):
+                with open(src, "rb") as f:
+                    out.write(f.read())
+                out.write(b"\n")
+        atexit.register(lambda: os.path.exists(path) and os.remove(path))
+        _ca_bundle_path = path
+    return _ca_bundle_path
+
+
+def verify_for(url):
+    """Расширенный набор корней — только для хостов RuStore, остальным дефолтный."""
+    host = (urlsplit(url).hostname or "").lower()
+    if any(host == s.lstrip(".") or host.endswith(s) for s in TRUSTED_CA_SUFFIXES):
+        return ca_bundle()
+    return True
+
 
 # Профиль устройства, которым мы представляемся. Значения по умолчанию
 # соответствуют RuStore 1.106.0.3 на современном Android-телефоне.
@@ -52,6 +93,7 @@ class RuStore:
         self.device_type = device_type
         self.session = requests.Session()
         self.session.headers.update(self._device_headers())
+        self.session.verify = verify_for(BASE)
 
     def _user_agent(self):
         # RuStore/<verName> (Android <release>; SDK <sdk>; <abis>; <manufacturer> <model>; <lang>)
@@ -230,7 +272,15 @@ def download_rustore_apk(package_name, output_dir=".", probes=1, splits=False,
     for i, url in enumerate(link["urls"]):
         suffix = "" if len(link["urls"]) == 1 else f"_{i}"
         output_path = os.path.join(output_dir, f"{package_name}{suffix}.apk")
-        response = requests.get(url, stream=True, timeout=60)
+        try:
+            response = requests.get(url, stream=True, timeout=60, verify=verify_for(url))
+        except requests.exceptions.SSLError as e:
+            host = urlsplit(url).hostname
+            print(f"Не удалось проверить сертификат {host}: {e}")
+            print(f"Если хост сменил УЦ, обновите {RUSSIAN_CA} или добавьте домен "
+                  f"в TRUSTED_CA_SUFFIXES")
+            return None
+        response.raise_for_status()
         container = BytesIO()
         with tqdm(total=int(response.headers.get("content-length", 0)),
                   unit="B", unit_scale=True, desc=f"{package_name}{suffix}") as bar:
