@@ -92,6 +92,22 @@ ru.oneme.app_config.xxhdpi.apk
 Ссылки ведут на zip, внутри которого лежит собственно APK; скрипт распаковывает
 его автоматически.
 
+### Сертификаты
+
+CDN раздачи (`static-m.rustore.ru`) выдаёт сертификат от НУЦ Минцифры — его нет
+ни в `certifi`, ни в системном сторе, поэтому на чистой машине (в том числе на
+раннере GitHub Actions) скачивание падало с `CERTIFICATE_VERIFY_FAILED`. Корень
+лежит в `certs/russian_trusted_ca.pem` и подмешивается к обычному набору
+`certifi` — но только для хостов из `TRUSTED_CA_SUFFIXES` (`*.rustore.ru`).
+Для всех остальных адресов проверка остаётся дефолтной, и нигде не отключается.
+
+Если RuStore снова сменит УЦ, достаточно обновить этот файл:
+
+```bash
+curl -s https://gu-st.ru/content/Other/doc/russian_trusted_root_ca.cer
+curl -s https://gu-st.ru/content/Other/doc/russian_trusted_sub_ca.cer
+```
+
 ## Остальные скрипты
 
 - `dumper_appgallery.py <APP_ID>` — дамп из Huawei AppGallery через публичный
