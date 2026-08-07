@@ -1,7 +1,7 @@
 {
     "class": "one.me.sdk.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 402,
+    "total_keys": 401,
     "keys": [
         "set-unread-timeout",
         "debug-mode",
@@ -164,7 +164,6 @@
         "folders-warm-up",
         "net-client-dns-enabled",
         "net-dns-store-enabled",
-        "icmp-ping",
         "creation-2fa-config",
         "one-video-player",
         "one-video-failover",
