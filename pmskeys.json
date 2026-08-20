@@ -1,7 +1,7 @@
 {
     "class": "one.me.sdk.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 407,
+    "total_keys": 414,
     "keys": [
         "set-unread-timeout",
         "debug-mode",
@@ -113,10 +113,9 @@
         "calls-ns",
         "calls-android-ac",
         "calls-android-ssr",
-        "calls-android-fcip",
         "calls-android-ncs",
+        "calls-ta",
         "calls-android-rmsf",
-        "calls-android-sni",
         "calls-android-asm",
         "calls-sdk-h265-prioritized",
         "calls-android-wtp",
@@ -125,6 +124,7 @@
         "call-permissions-interval",
         "call-phone-recall-timeout",
         "calls-android-opponent-registration-timeout",
+        "ios-gsm-redirect",
         "energy-saving-request-interval",
         "energy-saving-bottom-sheet",
         "comments-push",
@@ -311,9 +311,11 @@
         "stories-portrait-encoding",
         "stories-cbr-force",
         "stories-vbr-fallback-quality",
+        "stories-drawing-layers",
         "stories-photo-render",
         "stories-link",
         "stories-link-limit",
+        "stories-double-tap-reaction",
         "opus-recorder-bitrate",
         "opus-recorder-sample-rate",
         "glyph-warm",
@@ -400,7 +402,6 @@
         "hms-token-wait",
         "pip-auto-enter",
         "db-corrupt-logout",
-        "calls-quick-audio-response",
         "hide-unavailable-chats-to-forward",
         "call-service-foreground-fix",
         "media-autosave",
@@ -409,6 +410,12 @@
         "warning-links",
         "forwarded-post-views",
         "business-channel-botid",
-        "worker-service-new"
+        "worker-service-new",
+        "multipin-dialog",
+        "multipin-chat",
+        "multipin-channel",
+        "stat-network-params",
+        "enable-chat-preview",
+        "channel-fake-pixel"
     ]
 }
