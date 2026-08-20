@@ -1,11 +1,16 @@
 import argparse
 import atexit
+import base64
+import hashlib
+import hmac
 import json
 import os
+import random
 import re
+import secrets
 import sys
 import tempfile
-import uuid
+import time
 import zipfile
 from io import BytesIO
 from urllib.parse import urlsplit
@@ -55,9 +60,9 @@ def verify_for(url):
 
 
 # Профиль устройства, которым мы представляемся. Значения по умолчанию
-# соответствуют RuStore 1.106.0.3 на современном Android-телефоне.
-RUSTORE_VER_CODE = 1106003
-RUSTORE_VER_NAME = "1.106.0.3"
+# соответствуют RuStore 1.107.0.3 на современном Android-телефоне.
+RUSTORE_VER_CODE = 1107003
+RUSTORE_VER_NAME = "1.107.0.3"
 DEFAULT_SDK = 35
 DEFAULT_RELEASE = "15"
 DEFAULT_ABIS = ["arm64-v8a", "armeabi-v7a", "armeabi"]
@@ -67,6 +72,28 @@ DEFAULT_MANUFACTURER = "Google"
 DEFAULT_MODEL = "Pixel 8"
 DEFAULT_LANG = "ru"
 DEFAULT_DEVICE_TYPE = "mobile"  # mobile | tv
+
+# С августа 2026 backapi требует заголовок X-Client-Signature на всех запросах
+# витрины/скачивания — без него ответ 419 с пустым телом. Подпись повторяет
+# нативную libbridge_helper.so (com.ae.cf.bd.D) официального приложения:
+#
+#   X-Client-Signature = base64(HMAC_SHA256(SECURE_KEY, nonce || cert_sha256))
+#
+#   nonce       — 32 байта из POST api.rustore.ru/v1/secure/nonce (base64),
+#   cert_sha256 — SHA-256 сертификата подписи самого RuStore (константа),
+#   SECURE_KEY  — 32-байтный ключ, зашитый в libbridge_helper.so (константа,
+#                 не зависит от устройства; снят реверсом нативной либы).
+# Подпись живёт ~20 минут (TTL secure-сессии), поэтому считаем один раз на клиент.
+SECURE_KEY = bytes.fromhex(
+    "2be79e8826e75459d9ef528455a974839b221da5fabfa76b87cba978b8043e85"
+)
+RUSTORE_CERT_SHA256 = bytes.fromhex(
+    "661f20828ef780de0b79bc59f26a30864316355f30e4f91cfa14a20791839914"
+)
+NONCE_URL = "https://api.rustore.ru/v1/secure/nonce"
+
+RETRY_STATUSES = (419, 429, 500, 502, 503, 504)
+API_ATTEMPTS = 8
 
 
 class RuStore:
@@ -81,7 +108,7 @@ class RuStore:
     def __init__(self, device_id=None, sdk=DEFAULT_SDK, abis=None, density=DEFAULT_DENSITY,
                  locales=None, manufacturer=DEFAULT_MANUFACTURER, model=DEFAULT_MODEL,
                  lang=DEFAULT_LANG, release=DEFAULT_RELEASE, device_type=DEFAULT_DEVICE_TYPE):
-        self.device_id = device_id or str(uuid.uuid4())
+        self.device_id = device_id or self._random_device_id()
         self.sdk = sdk
         self.abis = abis or list(DEFAULT_ABIS)
         self.density = density
@@ -91,9 +118,15 @@ class RuStore:
         self.lang = lang
         self.release = release
         self.device_type = device_type
+        self._signature = None
         self.session = requests.Session()
         self.session.headers.update(self._device_headers())
         self.session.verify = verify_for(BASE)
+
+    @staticmethod
+    def _random_device_id():
+        # RuStore шлёт deviceId в формате <androidId(16 hex)>-<число>, а не UUID.
+        return f"{secrets.token_hex(8)}-{secrets.randbelow(4_000_000_000)}"
 
     def _user_agent(self):
         # RuStore/<verName> (Android <release>; SDK <sdk>; <abis>; <manufacturer> <model>; <lang>)
@@ -116,33 +149,71 @@ class RuStore:
             "User-Agent": self._user_agent(),
         }
 
+    def _client_signature(self):
+        """X-Client-Signature: base64(HMAC_SHA256(SECURE_KEY, nonce || cert_sha256)).
+
+        Кэшируется на клиент — одна подпись валидна весь TTL secure-сессии.
+        deviceId между запросом nonce и подписанными запросами не меняем.
+        """
+        if self._signature is None:
+            r = self._request("POST", NONCE_URL, json={},
+                               headers={"Content-Type": "application/json"})
+            nonce = base64.b64decode(r.json()["nonce"])
+            mac = hmac.new(SECURE_KEY, nonce + RUSTORE_CERT_SHA256, hashlib.sha256).digest()
+            self._signature = base64.b64encode(mac).decode()
+        return self._signature
+
+    def _request(self, method, url, attempts=API_ATTEMPTS, signed=False, **kwargs):
+        """Запрос с повторами: 419/5xx и пустые ответы API отдаёт вперемешку с 200."""
+        headers = dict(kwargs.pop("headers", None) or {})
+        if signed:
+            headers["X-Client-Signature"] = self._client_signature()
+        last = None
+        for i in range(attempts):
+            try:
+                r = self.session.request(method, url, timeout=30, headers=headers, **kwargs)
+            except requests.RequestException as e:
+                last = f"сеть: {e}"
+            else:
+                if r.status_code not in RETRY_STATUSES and r.content:
+                    return r
+                last = f"HTTP {r.status_code}" + ("" if r.content else " с пустым телом")
+            if i + 1 < attempts:
+                delay = min(1.0 * 1.6 ** i, 10) * (0.5 + random.random())
+                print(f"  {last}, повтор {i + 2}/{attempts} через {delay:.1f} c")
+                time.sleep(delay)
+        raise RuntimeError(f"API не ответил за {attempts} попыток ({last})")
+
     def app_info(self, package_name):
-        r = self.session.get(f"{BASE}/applicationData/overallInfo/{package_name}", timeout=30)
-        if not r.content:
-            raise RuntimeError(f"пустой ответ (HTTP {r.status_code}) — проверьте заголовки")
+        r = self._request("GET", f"{BASE}/applicationData/overallInfo/{package_name}", signed=True)
         data = r.json()
         if data.get("code") != "OK":
             return None
         return data["body"]
 
     def download_info(self, app_id, without_splits=True, first_install=True):
-        """POST v4/showcase/apps/download-link — эндпоинт актуального приложения."""
+        """POST v3/showcase/apps/download-link — актуальный эндпоинт скачивания.
+
+        Требует X-Client-Signature; v4 и старый applicationData/download-link
+        с августа 2026 отвечают 419.
+        """
         body = {
             "appId": app_id,
             "firstInstall": first_install,
+            "mobileServices": [],
             "supportedAbis": self.abis,
             "screenDensity": self.density,
             "supportedLocales": self.locales,
             "sdkVersion": self.sdk,
             "withoutSplits": without_splits,
             "signatureFingerprints": None,
-            "baseApkHash": None,
         }
-        r = self.session.post(
-            f"{BASE}/v4/showcase/apps/download-link",
+        r = self._request(
+            "POST",
+            f"{BASE}/v3/showcase/apps/download-link",
             json=body,
             headers={"Content-Type": "application/json; charset=utf-8"},
-            timeout=30,
+            signed=True,
         )
         if r.status_code == 200 and r.content:
             data = r.json()
@@ -151,22 +222,8 @@ class RuStore:
                 "versionId": data.get("versionId"),
                 "urls": [u["url"] for u in data.get("downloadUrls") or []],
             }
-        # Запасной путь — старый эндпоинт, он тоже уважает deviceId.
-        print(f"v4 вернул HTTP {r.status_code}, пробую applicationData/download-link")
-        r = self.session.post(
-            f"{BASE}/applicationData/download-link",
-            json={"appId": app_id, "firstInstall": first_install},
-            headers={"Content-Type": "application/json; charset=utf-8"},
-            timeout=30,
-        )
-        data = r.json()
-        if data.get("code") != "OK":
-            return None
-        return {
-            "versionCode": data["body"].get("versionCode"),
-            "versionId": None,
-            "urls": [data["body"]["apkUrl"]],
-        }
+        print(f"v3 вернул HTTP {r.status_code}")
+        return None
 
 
 def pick_best_client(package_name, probes, **kwargs):
