@@ -1,7 +1,7 @@
 {
     "class": "one.me.sdk.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 423,
+    "total_keys": 426,
     "keys": [
         "set-unread-timeout",
         "debug-mode",
@@ -406,6 +406,8 @@
         "db-corrupt-logout",
         "hide-unavailable-chats-to-forward",
         "call-service-foreground-fix",
+        "call-service-foreground-assert",
+        "call-service-finish-delay",
         "media-autosave",
         "one-video-preload-config",
         "one-video-okhttp",
@@ -425,6 +427,7 @@
         "pending-nav-stack",
         "bots-mute-restriction",
         "messages-side-button",
-        "fetch-reactions-last-message-timeout"
+        "fetch-reactions-last-message-timeout",
+        "use-cached-name-in-pushes"
     ]
 }
