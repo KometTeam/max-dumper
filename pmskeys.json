@@ -1,7 +1,7 @@
 {
     "class": "one.me.sdk.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 446,
+    "total_keys": 445,
     "keys": [
         "set-unread-timeout",
         "debug-mode",
@@ -447,7 +447,6 @@
         "self-service-user-interaction-interval",
         "release-version",
         "release-url",
-        "self-service-strings",
-        "widget-destroy-crash-fix"
+        "self-service-strings"
     ]
 }
