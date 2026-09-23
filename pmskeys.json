@@ -1,7 +1,7 @@
 {
     "class": "one.me.sdk.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 478,
+    "total_keys": 480,
     "keys": [
         "set-unread-timeout",
         "debug-mode",
@@ -293,7 +293,7 @@
         "new-message-context-menu",
         "photo-pinch-to-zoom",
         "perfect-links",
-        "chat-bottom-bar-v2",
+        "chat-bottom-bar-new",
         "stickers-botid",
         "sticker-set-edit-enabled",
         "invalidate-db-msg-exception",
@@ -480,6 +480,8 @@
         "fix-backstack-navigation",
         "message-text-selection",
         "unknown-chats",
-        "share-anr-fix"
+        "share-anr-fix",
+        "channel-cta-button",
+        "entity-org-action-ttl"
     ]
 }
