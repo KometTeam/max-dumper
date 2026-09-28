@@ -117,7 +117,40 @@ curl -s https://gu-st.ru/content/Other/doc/russian_trusted_sub_ca.cer
 
 ## Workflows
 
-- `dump-apk.yml` — дамп из RuStore, патч через apk-mitm, релиз на GitHub.
+- `test-build-rustore.yml` — ручная тестовая сборка из RuStore: фингерпринт из
+  `FINGERPRINT_PATCH`, затем apk-mitm. Готовый APK сохраняется в Actions →
+  выбранный запуск → Artifacts на 7 дней. Релиз не создаётся. Необязательные
+  параметры запуска: `device_id` и минимальная ожидаемая `version`.
+
+- `dump-apk.yml` — дамп из RuStore, патч фингерпринта и SSL-проверок, релиз на GitHub.
 - `dump-apk-appgallery.yml` — то же для AppGallery, принимает `app_id`.
 - `parser.yml` — по публикации релиза декомпилирует APK и обновляет
   `pmskeys.json`.
+
+## Патченная сборка
+
+Оба dump-workflow запускают `patches/patch_apk.sh`. Скрипт фингерпринта хранится
+в repository secret `FINGERPRINT_PATCH`, восстанавливается во временной папке
+на время сборки и удаляется при завершении. Его вывод не публикуется в логах.
+Apktool распаковывает код и ресурсы один раз. Затем применяется патч
+фингерпринта по оригинальному APK. Папка с изменениями передаётся напрямую
+в `apk-mitm` 1.3.0: он выполняет анпин, единственную пересборку и подпись. Перед публикацией проверяются подпись и выравнивание.
+Если патч не применился, сборка останавливается до публикации релиза.
+
+Обновление секрета из приватного локального файла:
+
+```bash
+gh secret set FINGERPRINT_PATCH --repo KometTeam/max-dumper < /private/patch_fingerprint.py
+```
+
+Локальная сборка (Java, Python 3, Apktool 3.0.2, apk-mitm 1.3.0, zipalign, apksigner):
+
+```bash
+FINGERPRINT_PATCH_FILE=/private/patch_fingerprint.py APKTOOL_JAR=/path/to/apktool.jar bash patches/patch_apk.sh original.apk patched.apk
+```
+
+Передавайте оригинальный APK. Результат подписывается тестовым ключом apk-mitm и не устанавливается
+как обновление поверх официального APK.
+Патченная сборка предназначена для анализа трафика.
+
+Тесты порядка сборки и обработки ошибок: `python3 -B -m unittest discover -s tests -v`.

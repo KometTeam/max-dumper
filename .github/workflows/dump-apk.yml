@@ -33,18 +33,19 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Install apk-mitm + fresh Apktool
-        # apk-mitm 1.3.0 несёт в комплекте apktool 2.9.3, который падает на
-        # свежих Material-атрибутах (state_dragged и т.п.) → patched.apk
-        # молча не собирается. Подсовываем актуальный apktool через --apktool.
+      - name: Test APK patches
+        run: python -m unittest discover -s tests -v
+
+      - name: Install APK build tools
         run: |
-          npm install -g apk-mitm
+          sudo apt-get update
+          sudo apt-get install -y apksigner zipalign
+          npm install -g apk-mitm@1.3.0
           APKTOOL_VER="3.0.2"
-          curl -sL "https://github.com/iBotPeaches/Apktool/releases/download/v${APKTOOL_VER}/apktool_${APKTOOL_VER}.jar" \
+          curl -fLsS "https://github.com/iBotPeaches/Apktool/releases/download/v${APKTOOL_VER}/apktool_${APKTOOL_VER}.jar" \
             -o /tmp/apktool.jar
-          echo "APKTOOL_JAR=/tmp/apktool.jar" >> $GITHUB_ENV
-          echo "Downloaded Apktool v${APKTOOL_VER} ($(wc -c < /tmp/apktool.jar) bytes)"
-      
+          echo "APKTOOL_JAR=/tmp/apktool.jar" >> "$GITHUB_ENV"
+
       - name: Download APK
         id: download
         env:
@@ -84,21 +85,16 @@ jobs:
           jq -r '.whats_new' app_info.json >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Patch APK with apk-mitm
+      - name: Patch fingerprint then run apk-mitm
         id: patch
+        env:
+          APK_FILE: ${{ steps.download.outputs.file }}
+          FINGERPRINT_PATCH: ${{ secrets.FINGERPRINT_PATCH }}
         run: |
-          APK_FILE="${{ steps.download.outputs.file }}"
           PATCHED_FILE="${APK_FILE%.apk}-patched.apk"
+          bash patches/patch_apk.sh "$APK_FILE" "$PATCHED_FILE"
+          echo "patched_file=$PATCHED_FILE" >> "$GITHUB_OUTPUT"
 
-          apk-mitm --apktool "$APKTOOL_JAR" "$APK_FILE" || true
-
-          if [ -f "$PATCHED_FILE" ]; then
-            echo "patched_file=$PATCHED_FILE" >> $GITHUB_OUTPUT
-            echo "✅ patched APK готов: $PATCHED_FILE"
-          else
-            echo "::warning::apk-mitm не собрал patched APK — релиз пойдёт без него"
-          fi
-      
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
@@ -117,7 +113,7 @@ jobs:
             ```
             ${{ steps.download.outputs.whats_new }}
             ```
-            🔓 `*-patched.apk` — версия с отключённым SSL pinning
+            🔓 `*-patched.apk` — версия с отключёнными SSL-проверками и фингерпринтом исходного APK
           files: |
             ${{ steps.download.outputs.file }}
             ${{ steps.patch.outputs.patched_file != '' && steps.patch.outputs.patched_file || '' }}

@@ -28,3 +28,5 @@ config.json
 .env
 bot_token.txt
 github_token.txt
+
+patch_fingerprint.py
