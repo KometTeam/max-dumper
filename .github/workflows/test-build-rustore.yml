@@ -1,6 +1,10 @@
 name: Test patched build from RuStore
 
 on:
+  push:
+    branches: [private-fingerprint]
+    paths:
+      - '.github/workflows/test-build-rustore.yml'
   workflow_dispatch:
     inputs:
       device_id:
