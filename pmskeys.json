@@ -1,7 +1,7 @@
 {
     "class": "one.me.sdk.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 488,
+    "total_keys": 490,
     "keys": [
         "set-unread-timeout",
         "debug-mode",
@@ -490,6 +490,8 @@
         "channel-cta-button",
         "entity-org-action-ttl",
         "treat-zero-as-now-for-delayed-message-edit",
-        "channel-fake-pixel-in-feed"
+        "channel-fake-pixel-in-feed",
+        "pkg-install-copy-fix",
+        "pkg-status-4-fix"
     ]
 }
