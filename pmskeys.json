@@ -1,7 +1,7 @@
 {
     "class": "one.me.sdk.prefs.PmsKey",
     "powered_by": "t.me/teamkomet",
-    "total_keys": 510,
+    "total_keys": 507,
     "keys": [
         "set-unread-timeout",
         "debug-mode",
@@ -243,9 +243,6 @@
         "non-contact-complaints-enabled",
         "ov-media-send-enabled",
         "typing-send-enabled",
-        "p2g-calls-enabled",
-        "p2p-calls-enabled",
-        "scheduled-messages-enabled",
         "cis-enabled",
         "channels-suggests-folder",
         "video-fast-seek-enabled",
